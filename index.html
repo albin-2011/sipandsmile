@@ -111,7 +111,6 @@
     </header>
 
     <main class="flex-grow">
-        <!-- Menu Section (Dynamic) -->
         <div id="menu-start" class="max-w-6xl mx-auto px-6 md:px-12 py-20">
             <div id="menu-loading" class="flex flex-col items-center justify-center py-12 text-cafe-500">
                 <i class="ph ph-spinner animate-spin text-4xl mb-4"></i>
@@ -120,18 +119,16 @@
             <div id="menu-container"></div>
         </div>
 
-        <!-- About Us Section -->
         <section id="about" class="bg-cafe-50 py-20 scroll-mt-20">
-            <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
+            <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll is-visible">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800 mb-6">Our Story</h2>
                 <div class="w-16 h-1 bg-cafe-300 mx-auto mb-8"></div>
-                <p id="display-about-text" class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center">Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.</p>
+                <p class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center">Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community right here in Wayanad.</p>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-20 scroll-mt-20">
-            <div class="max-w-6xl mx-auto px-6 md:px-12 reveal-on-scroll">
+            <div class="max-w-6xl mx-auto px-6 md:px-12 reveal-on-scroll is-visible">
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
                     <div class="bg-cafe-800 text-cafe-100 p-10 md:p-16 md:w-1/2 flex flex-col justify-center">
                         <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-8">Get in Touch</h2>
@@ -140,28 +137,28 @@
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-phone text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Phone</h4>
-                                    <p id="display-phone" class="text-xl font-medium text-white">+91 9995308082</p>
+                                    <p class="text-xl font-medium text-white">+91 9995308082</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-map-pin text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Visit Us</h4>
-                                    <p id="display-location" class="text-lg text-white whitespace-pre-wrap">Kozhikode, Kerala, India</p>
+                                    <p class="text-lg text-white whitespace-pre-wrap">Wayanad, Kerala, India</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-clock text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Hours</h4>
-                                    <p id="display-hours" class="text-lg text-white whitespace-pre-wrap">Mon-Sat: 8am - 9pm\nSun: Closed</p>
+                                    <p class="text-lg text-white whitespace-pre-wrap">Mon - Sun: 8:00 AM - 10:00 PM<br>(Open All Days)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="md:w-1/2 bg-cafe-200 relative min-h-[300px]">
-                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1000" alt="Cafe Interior" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1000" alt="Cafe Interior" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay" onerror="this.src='https://placehold.co/600x400/eaddd7/6f4f40?text=Cafe'">
                         <div class="absolute inset-0 flex items-center justify-center p-8">
                              <div class="text-center bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg inline-block">
                                  <i class="ph ph-coffee text-4xl text-cafe-600 mb-2"></i>
@@ -174,7 +171,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-cafe-900 text-cafe-100 py-8 border-t border-cafe-800">
         <div class="max-w-6xl mx-auto px-6 text-center text-sm text-cafe-400 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
@@ -189,7 +185,6 @@
         </div>
     </footer>
 
-    <!-- Item Detail Modal -->
     <div id="item-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0" onclick="window.closeItemModalOnOutsideClick(event)">
         <div id="item-modal-content" class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-all duration-300 relative flex flex-col max-h-[90vh]">
             <button onclick="window.closeItemModal()" class="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-md p-2 rounded-full text-gray-600 hover:text-cafe-900 hover:bg-white shadow-sm transition-all focus:outline-none">
@@ -235,8 +230,9 @@
         </div>
     </div>
 
+    <!-- Admin Panel Modal -->
     <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 md:p-6 overflow-y-auto modal-overlay transition-opacity duration-300 opacity-0">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300" id="admin-modal-content">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300" id="admin-modal-content">
             
             <div class="flex justify-between items-center p-6 border-b border-gray-100 bg-gray-50 shrink-0">
                 <h2 class="font-serif text-2xl font-bold text-cafe-900 flex items-center gap-2">
@@ -250,7 +246,7 @@
             <div class="flex px-6 border-b border-gray-200 bg-white shrink-0 overflow-x-auto custom-scrollbar whitespace-nowrap">
                 <button onclick="window.switchAdminTab('tab-menu')" id="btn-tab-menu" class="admin-tab active py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Menu Items</button>
                 <button onclick="window.switchAdminTab('tab-categories')" id="btn-tab-categories" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Categories</button>
-                <button onclick="window.switchAdminTab('tab-settings')" id="btn-tab-settings" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Site Settings</button>
+                <button onclick="window.switchAdminTab('tab-settings')" id="btn-tab-settings" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Branding & Socials</button>
                 <button onclick="window.switchAdminTab('tab-security')" id="btn-tab-security" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Security</button>
             </div>
 
@@ -300,7 +296,7 @@
                                     Manage Items
                                     <span id="item-count-badge" class="bg-cafe-100 text-cafe-800 text-xs py-1 px-2 rounded-full font-bold">0</span>
                                 </h3>
-                                <div id="admin-item-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 450px;">
+                                <div id="admin-item-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;">
                                     <!-- Populated via JS -->
                                 </div>
                             </div>
@@ -339,7 +335,7 @@
                         <div class="p-6 md:p-0 md:w-1/2 flex flex-col">
                             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Manage Categories</h3>
-                                <div id="admin-category-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 450px;">
+                                <div id="admin-category-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;">
                                     <!-- Populated via JS -->
                                 </div>
                             </div>
@@ -347,20 +343,20 @@
                     </div>
                 </div>
 
-                <!-- TAB 3: Site Settings -->
+                <!-- TAB 3: Branding & Social Settings -->
                 <div id="tab-settings" class="admin-tab-content p-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl mx-auto">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">Update Website Content</h3>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">Branding & Social Media Links</h3>
                         <form id="settings-form" class="space-y-6">
                             
                             <div class="bg-gray-50 p-4 rounded-lg space-y-4">
-                                <h4 class="font-medium text-cafe-800">Branding</h4>
+                                <h4 class="font-medium text-cafe-800">Cafe Name & Logo</h4>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cafe Name (Logo Text)</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cafe Title</label>
                                     <input type="text" id="set-logo" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Upload Logo Image (Optional)</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Logo Image (Optional)</label>
                                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                         <input type="file" id="set-logo-file" accept="image/*" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cafe-50 file:text-cafe-700 hover:file:bg-cafe-100 transition-colors">
                                         <div class="flex items-center gap-4">
@@ -372,44 +368,18 @@
                             </div>
 
                             <div class="bg-gray-50 p-4 rounded-lg space-y-4">
-                                <h4 class="font-medium text-cafe-800">About Us</h4>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Our Story</label>
-                                    <textarea id="set-about" rows="5" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500 resize-y"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
-                                <h4 class="font-medium text-cafe-800">Contact Details</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                        <input type="text" id="set-phone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Location / Address</label>
-                                        <input type="text" id="set-location" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Opening Hours</label>
-                                    <textarea id="set-hours" rows="2" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500 resize-y"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
                                 <h4 class="font-medium text-cafe-800">Social Media Links (URLs)</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Instagram</label><input type="url" id="set-ig" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
-                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Facebook</label><input type="url" id="set-fb" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
-                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">WhatsApp</label><input type="url" id="set-wa" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                <div class="space-y-3">
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Instagram URL</label><input type="url" id="set-ig" placeholder="https://instagram.com/..." class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Facebook URL</label><input type="url" id="set-fb" placeholder="https://facebook.com/..." class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">WhatsApp URL</label><input type="url" id="set-wa" placeholder="https://wa.me/..." class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
                                 </div>
                             </div>
 
                             <div class="flex justify-end pt-2">
-                                <button type="submit" id="btn-save-settings" class="bg-cafe-800 text-white font-medium py-2 px-8 rounded-lg hover:bg-cafe-900 transition-colors shadow">Save Settings</button>
+                                <button type="submit" id="btn-save-settings" class="bg-cafe-800 text-white font-medium py-2 px-8 rounded-lg hover:bg-cafe-900 transition-colors shadow">Save Changes</button>
                             </div>
-                            <p id="settings-success" class="text-green-600 text-sm text-right hidden">Settings saved securely to cloud!</p>
+                            <p id="settings-success" class="text-green-600 text-sm text-right hidden">Settings saved successfully!</p>
                         </form>
                     </div>
                 </div>
@@ -440,22 +410,18 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, deleteDoc, onSnapshot, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, addDoc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const myFirebaseConfig = {
-            apiKey: "AIzaSyAhlOCjH8QT4weGGD_Udr3a_2QrYiP9Luk",
-            authDomain: "sipandsmile-da442.firebaseapp.com",
-            projectId: "sipandsmile-da442",
-            storageBucket: "sipandsmile-da442.firebasestorage.app",
-            messagingSenderId: "768067294774",
-            appId: "1:768067294774:web:d82f37bdb79466baff2a97",
-            measurementId: "G-YVF6RRDD1S"
+        const firebaseConfig = {
+            apiKey: "AIzaSyAazq0oc4xdV8dq02OAyFgzxQuc2SXtzKc",
+            authDomain: "sip-and-smile.firebaseapp.com",
+            projectId: "sip-and-smile",
+            storageBucket: "sip-and-smile.firebasestorage.app",
+            messagingSenderId: "527671705356",
+            appId: "1:527671705356:web:f5764299f91a07d40fd329",
+            measurementId: "G-P94LD6XZJL"
         };
-
-        const isCustomConfigAdded = myFirebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
-        const platformConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const firebaseConfig = isCustomConfigAdded ? myFirebaseConfig : platformConfig;
         
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'sip-and-smile-v1';
         
@@ -465,7 +431,7 @@
             db = getFirestore(app);
             auth = getAuth(app);
         } catch (e) {
-            console.error("Firebase init failed:", e);
+            console.error("Firebase init failed", e);
         }
 
         const menuCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'menuItems');
@@ -474,101 +440,63 @@
 
         let menuItems = []; 
         let categoriesDef = []; 
-        
         let siteSettings = {
-            adminUser: 'sip', 
-            adminPass: 'smile',
-            logoText: 'Sip & Smile', 
-            logoImage: '',
-            aboutText: 'Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.',
-            contactPhone: '+91 9995308082', 
-            contactLocation: 'Kozhikode, Kerala, India',
-            contactHours: 'Mon-Sat: 8am - 9pm\nSun: Closed',
-            socialIG: '#', 
-            socialFB: '#', 
-            socialWA: '#'
+            adminUser: 'sip', adminPass: 'smile',
+            logoText: 'Sip & Smile', logoImage: '',
+            socialIG: '#', socialFB: '#', socialWA: '#'
         };
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
         async function initializeData() {
             try {
-                if (!isCustomConfigAdded && typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
+                await signInAnonymously(auth);
                 if (!auth.currentUser) return;
 
-                // Auto-seed/verify Settings if missing
-                const settingsSnap = await getDoc(settingsDocRef);
-                if (!settingsSnap.exists()) {
+                const catSnapCheck = await getDocs(categoriesCollectionRef);
+                if (catSnapCheck.empty) {
+                    await setDoc(doc(categoriesCollectionRef, 'beverages'), { title: 'Beverages', footer: '* Choice of milk available', order: 1 });
+                    await setDoc(doc(categoriesCollectionRef, 'food'), { title: 'Food & Snacks', order: 2 });
+                }
+
+                const setSnapCheck = await getDoc(settingsDocRef);
+                if (!setSnapCheck.exists()) {
                     await setDoc(settingsDocRef, siteSettings);
                 }
 
-                // Auto-seed Categories if empty
-                const catSnap = await getDocs(categoriesCollectionRef);
-                if (catSnap.empty) {
-                    await setDoc(doc(categoriesCollectionRef, 'espresso'), { title: 'Espresso Bar', footer: '* Choice of milk: Regular, Oat (+₹30)', order: 1 });
-                    await setDoc(doc(categoriesCollectionRef, 'pastries'), { title: 'Pastries & Bites', order: 2 });
-                }
-
-                // Real-time listener for Settings
                 onSnapshot(settingsDocRef, (snapshot) => {
                     if (snapshot.exists()) {
-                        const data = snapshot.data();
-                        siteSettings = { 
-                            ...siteSettings, 
-                            ...data,
-                            aboutText: data.aboutText || siteSettings.aboutText,
-                            contactPhone: data.contactPhone || siteSettings.contactPhone,
-                            contactLocation: data.contactLocation || siteSettings.contactLocation,
-                            contactHours: data.contactHours || siteSettings.contactHours
-                        };
+                        siteSettings = { ...siteSettings, ...snapshot.data() };
                     }
                     applySiteSettingsToDOM();
                     populateSettingsForm();
                     populateSecurityForm();
                 }, (error) => console.error("Settings error:", error));
 
-                // Real-time listener for Categories
                 onSnapshot(categoriesCollectionRef, (snapshot) => {
                     categoriesDef = [];
                     snapshot.forEach((docSnap) => {
                         categoriesDef.push({ id: docSnap.id, ...docSnap.data() });
                     });
                     categoriesDef.sort((a, b) => (a.order || 0) - (b.order || 0));
-
                     populateCategoryDropdown();
                     renderCategoryList();
                     renderMenu();
                 }, (error) => console.error("Category error:", error));
 
-                // Real-time listener for Menu Items
                 onSnapshot(menuCollectionRef, (snapshot) => {
                     menuItems = [];
                     snapshot.forEach((docSnap) => {
                         menuItems.push({ id: docSnap.id, ...docSnap.data() });
                     });
-                    
-                    const loadingEl = document.getElementById('menu-loading');
-                    if(loadingEl) loadingEl.classList.add('hidden');
+                    document.getElementById('menu-loading').classList.add('hidden');
                     renderMenu();
                     renderAdminList();
                 }, (error) => console.error("Menu error:", error));
 
-            } catch (authError) {
-                console.error("Auth Error:", authError);
-                const loadingEl = document.getElementById('menu-loading');
-                if(loadingEl) {
-                    loadingEl.innerHTML = `
-                        <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
-                            <p class="text-red-700 font-bold text-lg">Login Setup Incomplete</p>
-                            <p class="text-sm mt-2 text-gray-700">Firebase Console-il <b>Authentication -> Anonymous</b> enable cheythittilla.</p>
-                            <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${authError.message}</p>
-                        </div>`;
-                }
+            } catch (error) {
+                console.error("Init failed:", error);
+                document.getElementById('menu-loading').innerHTML = `<p class="text-red-500 font-medium">Connection Error: ${error.message}</p>`;
             }
         }
 
@@ -584,6 +512,7 @@
                 navImg.classList.remove('hidden');
                 navText.classList.add('hidden');
                 navIcon.classList.add('hidden');
+                
                 footerImg.src = siteSettings.logoImage;
                 footerImg.classList.remove('hidden');
                 footerText.classList.add('hidden');
@@ -592,15 +521,11 @@
                 navText.classList.remove('hidden');
                 navIcon.classList.remove('hidden');
                 navText.textContent = siteSettings.logoText || 'Sip & Smile';
+                
                 footerImg.classList.add('hidden');
                 footerText.classList.remove('hidden');
                 footerText.textContent = siteSettings.logoText || 'Sip & Smile';
             }
-            
-            document.getElementById('display-about-text').textContent = siteSettings.aboutText || 'Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one.';
-            document.getElementById('display-phone').textContent = siteSettings.contactPhone || '+91 9995308082';
-            document.getElementById('display-location').textContent = siteSettings.contactLocation || 'Kozhikode, Kerala, India';
-            document.getElementById('display-hours').textContent = siteSettings.contactHours || 'Mon-Sat: 8am - 9pm\nSun: Closed';
             
             document.getElementById('display-social-ig').href = siteSettings.socialIG || '#';
             document.getElementById('display-social-fb').href = siteSettings.socialFB || '#';
@@ -612,9 +537,6 @@
             const select = document.getElementById('item-category');
             if(!select) return;
             select.innerHTML = '';
-            if(categoriesDef.length === 0) {
-                select.innerHTML = '<option value="" disabled selected>Please add a Category first</option>';
-            }
             categoriesDef.forEach(cat => {
                 const opt = document.createElement('option');
                 opt.value = cat.id;
@@ -629,7 +551,7 @@
             container.innerHTML = '';
 
             if (menuItems.length === 0) {
-                container.innerHTML = '<div class="text-center py-16 bg-white rounded-2xl shadow-sm border border-cafe-100"><i class="ph ph-coffee text-6xl text-cafe-300 mb-4 inline-block"></i><p class="text-lg text-cafe-600 font-medium">Menu is currently empty.</p><p class="text-cafe-400 mt-2">Add items via the Admin Panel!</p></div>';
+                container.innerHTML = '<div class="text-center py-16 bg-white rounded-2xl shadow-sm border border-cafe-100"><i class="ph ph-coffee text-6xl text-cafe-300 mb-4 inline-block"></i><p class="text-lg text-cafe-600 font-medium">Menu is currently being updated.</p></div>';
                 return;
             }
 
@@ -664,7 +586,7 @@
                             `;
                         }
 
-                        const formattedPrice = `₹${parseFloat(item.price).toFixed(2)}`;
+                        const formattedPrice = `₹${parseFloat(item.price || 0).toFixed(0)}`;
                         itemCard.innerHTML = `
                             <div class="flex flex-1 pr-4">
                                 ${imageHTML}
@@ -698,7 +620,7 @@
             if (!item) return;
 
             document.getElementById('item-modal-name').textContent = item.name;
-            document.getElementById('item-modal-price').textContent = `₹${parseFloat(item.price).toFixed(2)}`;
+            document.getElementById('item-modal-price').textContent = `₹${parseFloat(item.price || 0).toFixed(0)}`;
             document.getElementById('item-modal-desc').textContent = item.desc;
             
             const catDef = categoriesDef.find(c => c.id === item.category);
@@ -712,6 +634,7 @@
                 imgContainer.classList.remove('hidden');
                 contentDiv.classList.add('-mt-4', 'rounded-t-3xl');
                 imgEl.src = item.image;
+                imgEl.onerror = () => { imgContainer.classList.add('hidden'); };
             } else {
                 imgContainer.classList.add('hidden');
                 contentDiv.classList.remove('-mt-4', 'rounded-t-3xl');
@@ -792,8 +715,6 @@
                 modal.classList.remove('flex');
                 document.body.style.overflow = '';
             }, 300);
-            window.resetItemForm();
-            window.resetCategoryForm();
         };
 
         window.switchAdminTab = (tabId) => {
@@ -829,15 +750,11 @@
                     itemEl.innerHTML = `
                         <div class="truncate pr-4 flex-1">
                             <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(item.name)}</p>
-                            <p class="text-xs text-gray-500">₹${parseFloat(item.price).toFixed(2)}</p>
+                            <p class="text-xs text-gray-500">₹${parseFloat(item.price || 0).toFixed(0)}</p>
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="window.editItem('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit">
-                                <i class="ph ph-pencil-simple"></i>
-                            </button>
-                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete">
-                                <i class="ph ph-trash"></i>
-                            </button>
+                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="window.editItem('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
+                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-blue-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                         </div>
                     `;
                     listContainer.appendChild(itemEl);
@@ -850,26 +767,17 @@
             if(!listContainer) return;
             listContainer.innerHTML = '';
 
-            if (categoriesDef.length === 0) {
-                listContainer.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">No categories found.</p>';
-                return;
-            }
-
             categoriesDef.forEach(cat => {
                 const catEl = document.createElement('div');
                 catEl.className = 'bg-white p-3 rounded-lg border border-gray-200 flex justify-between items-center group shadow-sm hover:border-cafe-300 transition-colors mb-2';
                 catEl.innerHTML = `
                     <div class="truncate pr-4 flex-1">
-                        <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(cat.title)} <span class="text-xs text-gray-400">(${cat.id})</span></p>
+                        <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(cat.title)}</p>
                         <p class="text-xs text-gray-500">Order: ${cat.order || 0}</p>
                     </div>
-                    <div class="flex gap-2">
-                        <button onclick="window.editCategory('${cat.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit">
-                            <i class="ph ph-pencil-simple"></i>
-                        </button>
-                        <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete">
-                            <i class="ph ph-trash"></i>
-                        </button>
+                    <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onclick="window.editCategory('${cat.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
+                        <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                     </div>
                 `;
                 listContainer.appendChild(catEl);
@@ -888,9 +796,9 @@
             }
         });
 
-        // MENU ITEM CRUD
         document.getElementById('item-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!auth.currentUser) return;
             const submitBtn = document.getElementById('btn-save-item');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Saving...';
@@ -941,6 +849,7 @@
         };
 
         window.deleteItem = async (id) => {
+            if (!auth.currentUser) return;
             try {
                 await deleteDoc(doc(menuCollectionRef, id));
                 if (document.getElementById('item-id').value === id) window.resetItemForm();
@@ -953,29 +862,28 @@
             document.getElementById('item-id').value = '';
         };
 
-        // CATEGORY CRUD
         document.getElementById('category-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!auth.currentUser) return;
             const submitBtn = document.getElementById('btn-save-cat');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Saving...';
             submitBtn.disabled = true;
 
-            const originalId = document.getElementById('cat-id').value;
-            const titleVal = document.getElementById('cat-title').value;
-            const customId = originalId || titleVal.trim().toLowerCase().replace(/\s+/g, '-');
-            
+            const id = document.getElementById('cat-id').value;
             const newCatData = {
-                title: titleVal,
+                title: document.getElementById('cat-title').value,
                 footer: document.getElementById('cat-footer').value,
                 order: parseInt(document.getElementById('cat-order').value) || 1
             };
 
             try {
-                if (originalId && originalId !== customId) {
-                    await deleteDoc(doc(categoriesCollectionRef, originalId));
+                if (id) {
+                    await setDoc(doc(categoriesCollectionRef, id), newCatData);
+                } else {
+                    const customId = newCatData.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    await setDoc(doc(categoriesCollectionRef, customId), newCatData);
                 }
-                await setDoc(doc(categoriesCollectionRef, customId), newCatData);
                 window.resetCategoryForm();
                 submitBtn.textContent = 'Saved!';
                 submitBtn.classList.replace('bg-cafe-600', 'bg-green-600');
@@ -1002,11 +910,7 @@
         };
 
         window.deleteCategory = async (id) => {
-            const hasItems = menuItems.some(i => i.category === id);
-            if(hasItems) {
-                console.warn("Please delete all items in this category first!");
-                return;
-            }
+            if (!auth.currentUser) return;
             try {
                 await deleteDoc(doc(categoriesCollectionRef, id));
                 if (document.getElementById('cat-id').value === id) window.resetCategoryForm();
@@ -1023,7 +927,8 @@
         let tempLogoImage = '';
 
         function populateSettingsForm() {
-            document.getElementById('set-logo').value = siteSettings.logoText;
+            document.getElementById('set-logo').value = siteSettings.logoText || 'Sip & Smile';
+
             tempLogoImage = siteSettings.logoImage || '';
             const preview = document.getElementById('settings-logo-preview');
             const removeBtn = document.getElementById('btn-remove-logo');
@@ -1037,11 +942,6 @@
                 removeBtn.classList.add('hidden');
             }
             
-            document.getElementById('set-logo-file').value = '';
-            document.getElementById('set-about').value = siteSettings.aboutText;
-            document.getElementById('set-phone').value = siteSettings.contactPhone;
-            document.getElementById('set-location').value = siteSettings.contactLocation;
-            document.getElementById('set-hours').value = siteSettings.contactHours;
             document.getElementById('set-ig').value = siteSettings.socialIG || '';
             document.getElementById('set-fb').value = siteSettings.socialFB || '';
             document.getElementById('set-wa').value = siteSettings.socialWA || '';
@@ -1062,6 +962,7 @@
                         canvas.width = width; canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
+                        
                         tempLogoImage = canvas.toDataURL('image/webp', 0.8);
                         const preview = document.getElementById('settings-logo-preview');
                         preview.src = tempLogoImage;
@@ -1083,16 +984,13 @@
 
         document.getElementById('settings-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!auth.currentUser) return;
             const submitBtn = document.getElementById('btn-save-settings');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Saving...';
             
             siteSettings.logoText = document.getElementById('set-logo').value;
             siteSettings.logoImage = tempLogoImage;
-            siteSettings.aboutText = document.getElementById('set-about').value;
-            siteSettings.contactPhone = document.getElementById('set-phone').value;
-            siteSettings.contactLocation = document.getElementById('set-location').value;
-            siteSettings.contactHours = document.getElementById('set-hours').value;
             siteSettings.socialIG = document.getElementById('set-ig').value;
             siteSettings.socialFB = document.getElementById('set-fb').value;
             siteSettings.socialWA = document.getElementById('set-wa').value;
@@ -1108,12 +1006,13 @@
         });
 
         function populateSecurityForm() {
-            document.getElementById('set-username').value = siteSettings.adminUser;
-            document.getElementById('set-password').value = siteSettings.adminPass;
+            document.getElementById('set-username').value = siteSettings.adminUser || 'sip';
+            document.getElementById('set-password').value = siteSettings.adminPass || 'smile';
         }
 
         document.getElementById('security-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!auth.currentUser) return;
             const newUser = document.getElementById('set-username').value;
             const newPass = document.getElementById('set-password').value;
             
