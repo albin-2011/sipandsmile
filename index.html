@@ -64,7 +64,6 @@
 </head>
 <body class="selection:bg-cafe-200 selection:text-cafe-900 flex flex-col min-h-screen relative">
 
-    <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-4">
         <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
             <a href="#" class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-cafe-800 flex items-center gap-2">
@@ -93,7 +92,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cafe-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-cafe-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
@@ -127,7 +125,7 @@
             <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800 mb-6">Our Story</h2>
                 <div class="w-16 h-1 bg-cafe-300 mx-auto mb-8"></div>
-                <p id="display-about-text" class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center"></p>
+                <p id="display-about-text" class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center">Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.</p>
             </div>
         </section>
 
@@ -142,21 +140,21 @@
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-phone text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Phone</h4>
-                                    <p id="display-phone" class="text-xl font-medium text-white"></p>
+                                    <p id="display-phone" class="text-xl font-medium text-white">+91 9995308082</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-map-pin text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Visit Us</h4>
-                                    <p id="display-location" class="text-lg text-white whitespace-pre-wrap"></p>
+                                    <p id="display-location" class="text-lg text-white whitespace-pre-wrap">Kozhikode, Kerala, India</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-clock text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Hours</h4>
-                                    <p id="display-hours" class="text-lg text-white whitespace-pre-wrap"></p>
+                                    <p id="display-hours" class="text-lg text-white whitespace-pre-wrap">Mon-Sat: 8am - 9pm\nSun: Closed</p>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +235,6 @@
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
     <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 md:p-6 overflow-y-auto modal-overlay transition-opacity duration-300 opacity-0">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300" id="admin-modal-content">
             
@@ -311,7 +308,7 @@
                     </div>
                 </div>
 
-                <!-- TAB 1.5: Categories -->
+                <!-- TAB 2: Categories -->
                 <div id="tab-categories" class="admin-tab-content p-0 md:p-6">
                     <div class="flex flex-col md:flex-row gap-6 md:bg-transparent bg-white">
                         <div class="p-6 md:p-0 md:w-1/2 bg-white md:bg-transparent rounded-xl">
@@ -319,10 +316,6 @@
                                 <h3 id="cat-form-title" class="text-lg font-semibold text-gray-800 mb-4">Add New Category</h3>
                                 <form id="category-form" class="space-y-4">
                                     <input type="hidden" id="cat-id">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Category ID (e.g. espresso, cold-drinks)</label>
-                                        <input type="text" id="cat-key" required placeholder="e.g. cold-drinks" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
-                                    </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Category Title</label>
                                         <input type="text" id="cat-title" required placeholder="e.g. Cold Beverages" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
@@ -354,7 +347,7 @@
                     </div>
                 </div>
 
-                <!-- TAB 2: Site Settings -->
+                <!-- TAB 3: Site Settings -->
                 <div id="tab-settings" class="admin-tab-content p-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl mx-auto">
                         <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">Update Website Content</h3>
@@ -375,7 +368,6 @@
                                             <button type="button" id="btn-remove-logo" class="hidden text-sm text-red-600 hover:text-red-800 font-medium">Remove</button>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-2">Uploading an image replaces the text logo.</p>
                                 </div>
                             </div>
 
@@ -422,7 +414,7 @@
                     </div>
                 </div>
 
-                <!-- TAB 3: Security -->
+                <!-- TAB 4: Security -->
                 <div id="tab-security" class="admin-tab-content p-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-md mx-auto">
                         <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2 text-red-600 flex items-center gap-2">
@@ -448,11 +440,10 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, deleteDoc, onSnapshot, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Your Firebase Configuration
-        const firebaseConfig = {
+        const myFirebaseConfig = {
             apiKey: "AIzaSyAhlOCjH8QT4weGGD_Udr3a_2QrYiP9Luk",
             authDomain: "sipandsmile-da442.firebaseapp.com",
             projectId: "sipandsmile-da442",
@@ -461,6 +452,12 @@
             appId: "1:768067294774:web:d82f37bdb79466baff2a97",
             measurementId: "G-YVF6RRDD1S"
         };
+
+        const isCustomConfigAdded = myFirebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+        const platformConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = isCustomConfigAdded ? myFirebaseConfig : platformConfig;
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sip-and-smile-v1';
         
         let app, db, auth;
         try {
@@ -469,10 +466,8 @@
             auth = getAuth(app);
         } catch (e) {
             console.error("Firebase init failed:", e);
-            document.getElementById('menu-loading').innerHTML = '<p class="text-red-500 font-medium">Database connection failed.</p>';
         }
 
-        const appId = 'sip-and-smile-v1';
         const menuCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'menuItems');
         const categoriesCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'categories');
         const settingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
@@ -481,72 +476,100 @@
         let categoriesDef = []; 
         
         let siteSettings = {
-            adminUser: 'sip', adminPass: 'smile',
-            logoText: 'Sip & Smile', logoImage: '',
+            adminUser: 'sip', 
+            adminPass: 'smile',
+            logoText: 'Sip & Smile', 
+            logoImage: '',
             aboutText: 'Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.',
-            contactPhone: '+91 9995308082', contactLocation: 'Kozhikode, Kerala, India',
+            contactPhone: '+91 9995308082', 
+            contactLocation: 'Kozhikode, Kerala, India',
             contactHours: 'Mon-Sat: 8am - 9pm\nSun: Closed',
-            socialIG: '#', socialFB: '#', socialWA: '#'
+            socialIG: '#', 
+            socialFB: '#', 
+            socialWA: '#'
         };
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
         async function initializeData() {
             try {
-                await signInAnonymously(auth);
+                if (!isCustomConfigAdded && typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                if (!auth.currentUser) return;
+
+                // Auto-seed/verify Settings if missing
+                const settingsSnap = await getDoc(settingsDocRef);
+                if (!settingsSnap.exists()) {
+                    await setDoc(settingsDocRef, siteSettings);
+                }
+
+                // Auto-seed Categories if empty
+                const catSnap = await getDocs(categoriesCollectionRef);
+                if (catSnap.empty) {
+                    await setDoc(doc(categoriesCollectionRef, 'espresso'), { title: 'Espresso Bar', footer: '* Choice of milk: Regular, Oat (+₹30)', order: 1 });
+                    await setDoc(doc(categoriesCollectionRef, 'pastries'), { title: 'Pastries & Bites', order: 2 });
+                }
+
+                // Real-time listener for Settings
+                onSnapshot(settingsDocRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.data();
+                        siteSettings = { 
+                            ...siteSettings, 
+                            ...data,
+                            aboutText: data.aboutText || siteSettings.aboutText,
+                            contactPhone: data.contactPhone || siteSettings.contactPhone,
+                            contactLocation: data.contactLocation || siteSettings.contactLocation,
+                            contactHours: data.contactHours || siteSettings.contactHours
+                        };
+                    }
+                    applySiteSettingsToDOM();
+                    populateSettingsForm();
+                    populateSecurityForm();
+                }, (error) => console.error("Settings error:", error));
+
+                // Real-time listener for Categories
+                onSnapshot(categoriesCollectionRef, (snapshot) => {
+                    categoriesDef = [];
+                    snapshot.forEach((docSnap) => {
+                        categoriesDef.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    categoriesDef.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+                    populateCategoryDropdown();
+                    renderCategoryList();
+                    renderMenu();
+                }, (error) => console.error("Category error:", error));
+
+                // Real-time listener for Menu Items
+                onSnapshot(menuCollectionRef, (snapshot) => {
+                    menuItems = [];
+                    snapshot.forEach((docSnap) => {
+                        menuItems.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    const loadingEl = document.getElementById('menu-loading');
+                    if(loadingEl) loadingEl.classList.add('hidden');
+                    renderMenu();
+                    renderAdminList();
+                }, (error) => console.error("Menu error:", error));
+
             } catch (authError) {
                 console.error("Auth Error:", authError);
-                document.getElementById('menu-loading').innerHTML = `
-                    <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
-                        <p class="text-red-700 font-bold text-lg">Login Setup Incomplete</p>
-                        <p class="text-sm mt-2 text-gray-700">Firebase Console-il <b>Authentication -> Anonymous</b> enable cheythittilla.</p>
-                        <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${authError.message}</p>
-                    </div>`;
-                return;
+                const loadingEl = document.getElementById('menu-loading');
+                if(loadingEl) {
+                    loadingEl.innerHTML = `
+                        <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
+                            <p class="text-red-700 font-bold text-lg">Login Setup Incomplete</p>
+                            <p class="text-sm mt-2 text-gray-700">Firebase Console-il <b>Authentication -> Anonymous</b> enable cheythittilla.</p>
+                            <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${authError.message}</p>
+                        </div>`;
+                }
             }
-
-            // Real-time listener for Settings
-            onSnapshot(settingsDocRef, (snapshot) => {
-                if (snapshot.exists()) {
-                    siteSettings = { ...siteSettings, ...snapshot.data() };
-                } else {
-                    setDoc(settingsDocRef, siteSettings);
-                }
-                applySiteSettingsToDOM();
-                populateSettingsForm();
-                populateSecurityForm();
-            }, (error) => console.error("Settings error:", error));
-
-            // Real-time listener for Categories
-            onSnapshot(categoriesCollectionRef, (snapshot) => {
-                categoriesDef = [];
-                snapshot.forEach((docSnap) => {
-                    categoriesDef.push({ id: docSnap.id, ...docSnap.data() });
-                });
-                categoriesDef.sort((a, b) => (a.order || 0) - (b.order || 0));
-                
-                // Default categories if empty
-                if (categoriesDef.length === 0) {
-                    setDoc(doc(categoriesCollectionRef, 'espresso'), { title: 'Espresso Bar', footer: '* Choice of milk: Regular, Oat (+₹30)', order: 1 });
-                    setDoc(doc(categoriesCollectionRef, 'pastries'), { title: 'Pastries & Bites', order: 2 });
-                }
-
-                populateCategoryDropdown();
-                renderCategoryList();
-                renderMenu();
-            }, (error) => console.error("Category error:", error));
-
-            // Real-time listener for Menu Items
-            onSnapshot(menuCollectionRef, (snapshot) => {
-                menuItems = [];
-                snapshot.forEach((docSnap) => {
-                    menuItems.push({ id: docSnap.id, ...docSnap.data() });
-                });
-                
-                document.getElementById('menu-loading').classList.add('hidden');
-                renderMenu();
-                renderAdminList();
-            }, (error) => console.error("Menu error:", error));
         }
 
         function applySiteSettingsToDOM() {
@@ -568,25 +591,26 @@
                 navImg.classList.add('hidden');
                 navText.classList.remove('hidden');
                 navIcon.classList.remove('hidden');
-                navText.textContent = siteSettings.logoText;
+                navText.textContent = siteSettings.logoText || 'Sip & Smile';
                 footerImg.classList.add('hidden');
                 footerText.classList.remove('hidden');
-                footerText.textContent = siteSettings.logoText;
+                footerText.textContent = siteSettings.logoText || 'Sip & Smile';
             }
             
-            document.getElementById('display-about-text').textContent = siteSettings.aboutText;
-            document.getElementById('display-phone').textContent = siteSettings.contactPhone;
-            document.getElementById('display-location').textContent = siteSettings.contactLocation;
-            document.getElementById('display-hours').textContent = siteSettings.contactHours;
+            document.getElementById('display-about-text').textContent = siteSettings.aboutText || 'Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one.';
+            document.getElementById('display-phone').textContent = siteSettings.contactPhone || '+91 9995308082';
+            document.getElementById('display-location').textContent = siteSettings.contactLocation || 'Kozhikode, Kerala, India';
+            document.getElementById('display-hours').textContent = siteSettings.contactHours || 'Mon-Sat: 8am - 9pm\nSun: Closed';
             
             document.getElementById('display-social-ig').href = siteSettings.socialIG || '#';
             document.getElementById('display-social-fb').href = siteSettings.socialFB || '#';
             document.getElementById('display-social-wa').href = siteSettings.socialWA || '#';
-            document.title = `${siteSettings.logoText} | Menu`;
+            document.title = `${siteSettings.logoText || 'Sip & Smile'} | Menu`;
         }
 
         function populateCategoryDropdown() {
             const select = document.getElementById('item-category');
+            if(!select) return;
             select.innerHTML = '';
             if(categoriesDef.length === 0) {
                 select.innerHTML = '<option value="" disabled selected>Please add a Category first</option>';
@@ -601,6 +625,7 @@
 
         function renderMenu() {
             const container = document.getElementById('menu-container');
+            if(!container) return;
             container.innerHTML = '';
 
             if (menuItems.length === 0) {
@@ -780,6 +805,7 @@
 
         function renderAdminList() {
             const listContainer = document.getElementById('admin-item-list');
+            if(!listContainer) return;
             document.getElementById('item-count-badge').textContent = menuItems.length;
             listContainer.innerHTML = '';
 
@@ -821,6 +847,7 @@
 
         function renderCategoryList() {
             const listContainer = document.getElementById('admin-category-list');
+            if(!listContainer) return;
             listContainer.innerHTML = '';
 
             if (categoriesDef.length === 0) {
@@ -934,18 +961,18 @@
             submitBtn.textContent = 'Saving...';
             submitBtn.disabled = true;
 
-            const customId = document.getElementById('cat-key').value.trim().toLowerCase().replace(/\s+/g, '-');
             const originalId = document.getElementById('cat-id').value;
+            const titleVal = document.getElementById('cat-title').value;
+            const customId = originalId || titleVal.trim().toLowerCase().replace(/\s+/g, '-');
             
             const newCatData = {
-                title: document.getElementById('cat-title').value,
+                title: titleVal,
                 footer: document.getElementById('cat-footer').value,
                 order: parseInt(document.getElementById('cat-order').value) || 1
             };
 
             try {
                 if (originalId && originalId !== customId) {
-                    // If changing category key, delete old and create new
                     await deleteDoc(doc(categoriesCollectionRef, originalId));
                 }
                 await setDoc(doc(categoriesCollectionRef, customId), newCatData);
@@ -969,8 +996,6 @@
             if (!cat) return;
             document.getElementById('cat-form-title').textContent = 'Edit Category';
             document.getElementById('cat-id').value = cat.id;
-            document.getElementById('cat-key').value = cat.id;
-            document.getElementById('cat-key').disabled = true; // prevent breaking existing item links easily
             document.getElementById('cat-title').value = cat.title;
             document.getElementById('cat-footer').value = cat.footer || '';
             document.getElementById('cat-order').value = cat.order || 1;
@@ -979,7 +1004,7 @@
         window.deleteCategory = async (id) => {
             const hasItems = menuItems.some(i => i.category === id);
             if(hasItems) {
-                alert("Please delete all items in this category first!");
+                console.warn("Please delete all items in this category first!");
                 return;
             }
             try {
@@ -992,7 +1017,6 @@
             document.getElementById('cat-form-title').textContent = 'Add New Category';
             document.getElementById('category-form').reset();
             document.getElementById('cat-id').value = '';
-            document.getElementById('cat-key').disabled = false;
             document.getElementById('cat-order').value = categoriesDef.length + 1;
         };
 
