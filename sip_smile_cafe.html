@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sip & Smile Cafe | Menu</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        cafe: {
+                            50: '#fdf8f6', 100: '#f2e8e5', 200: '#eaddd7', 300: '#e0cec7',
+                            400: '#d2bab0', 500: '#a37c68', 600: '#8a6452', 700: '#6f4f40',
+                            800: '#523a2f', 900: '#3a2a22',
+                        },
+                        cream: '#FDFBF7', charcoal: '#2D2B2A',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #FDFBF7; color: #2D2B2A; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fdf8f6; }
+        ::-webkit-scrollbar-thumb { background: #d2bab0; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a37c68; }
+        .menu-item-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .menu-item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(163, 124, 104, 0.1), 0 8px 10px -6px rgba(163, 124, 104, 0.1);
+        }
+        .category-link { position: relative; }
+        .category-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -2px; left: 0; background-color: #a37c68; transition: width 0.3s ease;
+        }
+        .category-link:hover::after, .category-link.active::after { width: 100%; }
+        .reveal-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .modal-overlay { backdrop-filter: blur(4px); }
+        .whitespace-pre-wrap { white-space: pre-wrap; }
+        .admin-tab { border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .admin-tab.active { border-bottom-color: #a37c68; color: #6f4f40; font-weight: 600; }
+        .admin-tab-content { display: none; }
+        .admin-tab-content.active { display: block; }
+    </style>
+</head>
+<body class="selection:bg-cafe-200 selection:text-cafe-900 flex flex-col min-h-screen relative">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-cafe-800 flex items-center gap-2">
+                <img id="display-logo-img" src="" alt="Cafe Logo" class="hidden h-10 w-auto object-contain">
+                <i id="display-logo-icon" class="ph ph-coffee text-cafe-500"></i>
+                <span id="display-logo-text">Sip & Smile</span>
+            </a>
+            
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="#menu-start" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">Menu</a>
+                <a href="#about" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">About</a>
+                <a href="#contact" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">Contact</a>
+                <button onclick="window.openLoginModal()" class="text-sm font-medium text-cafe-500 hover:text-cafe-700 transition-colors ml-4 border border-cafe-200 px-3 py-1 rounded-full hover:bg-cafe-50">Admin</button>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-cafe-800 p-2 focus:outline-none">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-cream border-b border-cafe-100 shadow-sm flex-col py-4 px-6 gap-4 items-center">
+            <a href="#menu-start" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Menu</a>
+            <a href="#about" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">About</a>
+            <a href="#contact" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Contact</a>
+            <button onclick="window.openLoginModal(); document.getElementById('mobile-menu').classList.add('hidden');" class="text-cafe-500 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded border border-cafe-200 mt-2">Admin Panel</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cafe-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-cafe-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+
+        <div class="relative max-w-4xl mx-auto px-6 text-center z-10 transition-all duration-700 ease-out translate-y-0 opacity-100">
+            <p class="text-sm md:text-base font-semibold tracking-widest text-cafe-500 uppercase mb-4">Welcome to your happy place</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-cafe-900 mb-6 leading-tight">
+                Every cup is a reason to <span class="italic text-cafe-500">smile.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Artisan coffee, fresh pastries, and a warm atmosphere. Take a moment for yourself and explore our carefully curated menu.
+            </p>
+            <a href="#menu-start" class="inline-flex items-center gap-2 bg-cafe-800 text-white px-8 py-4 rounded-full font-medium hover:bg-cafe-900 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
+                View Menu <i class="ph ph-arrow-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Menu Section (Dynamic) -->
+        <div id="menu-start" class="max-w-6xl mx-auto px-6 md:px-12 py-20">
+            <div id="menu-loading" class="flex flex-col items-center justify-center py-12 text-cafe-500">
+                <i class="ph ph-spinner animate-spin text-4xl mb-4"></i>
+                <p>Loading our delicious menu...</p>
+            </div>
+            <div id="menu-container"></div>
+        </div>
+
+        <!-- About Us Section -->
+        <section id="about" class="bg-cafe-50 py-20 scroll-mt-20">
+            <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800 mb-6">Our Story</h2>
+                <div class="w-16 h-1 bg-cafe-300 mx-auto mb-8"></div>
+                <p id="display-about-text" class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center"></p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 scroll-mt-20">
+            <div class="max-w-6xl mx-auto px-6 md:px-12 reveal-on-scroll">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="bg-cafe-800 text-cafe-100 p-10 md:p-16 md:w-1/2 flex flex-col justify-center">
+                        <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-8">Get in Touch</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-phone text-2xl text-cafe-200"></i></div>
+                                <div>
+                                    <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Phone</h4>
+                                    <p id="display-phone" class="text-xl font-medium text-white"></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-map-pin text-2xl text-cafe-200"></i></div>
+                                <div>
+                                    <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Visit Us</h4>
+                                    <p id="display-location" class="text-lg text-white whitespace-pre-wrap"></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-clock text-2xl text-cafe-200"></i></div>
+                                <div>
+                                    <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Hours</h4>
+                                    <p id="display-hours" class="text-lg text-white whitespace-pre-wrap"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 bg-cafe-200 relative min-h-[300px]">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1000" alt="Cafe Interior" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay">
+                        <div class="absolute inset-0 flex items-center justify-center p-8">
+                             <div class="text-center bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg inline-block">
+                                 <i class="ph ph-coffee text-4xl text-cafe-600 mb-2"></i>
+                                 <p class="font-serif text-xl text-cafe-900 font-semibold">We look forward to<br>serving you!</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cafe-900 text-cafe-100 py-8 border-t border-cafe-800">
+        <div class="max-w-6xl mx-auto px-6 text-center text-sm text-cafe-400 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale">
+                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text">Sip & Smile</span>. All rights reserved.</p>
+            </div>
+            <div class="flex gap-4">
+                <a id="display-social-ig" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
+                <a id="display-social-fb" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-facebook-logo text-xl"></i></a>
+                <a id="display-social-wa" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-whatsapp-logo text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Item Detail Modal -->
+    <div id="item-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0" onclick="window.closeItemModalOnOutsideClick(event)">
+        <div id="item-modal-content" class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-all duration-300 relative flex flex-col max-h-[90vh]">
+            <button onclick="window.closeItemModal()" class="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-md p-2 rounded-full text-gray-600 hover:text-cafe-900 hover:bg-white shadow-sm transition-all focus:outline-none">
+                <i class="ph ph-x text-lg"></i>
+            </button>
+            <div id="item-modal-img-container" class="w-full h-48 sm:h-64 bg-cafe-100 hidden relative shrink-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 pointer-events-none"></div>
+                <img id="item-modal-img" src="" alt="Menu Item" class="w-full h-full object-cover relative z-0">
+            </div>
+            <div class="p-6 sm:p-8 bg-white relative z-10 overflow-y-auto custom-scrollbar">
+                <p id="item-modal-category" class="text-xs font-bold text-cafe-500 uppercase tracking-wider mb-2"></p>
+                <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 id="item-modal-name" class="font-serif text-2xl sm:text-3xl font-bold text-cafe-900 leading-tight"></h3>
+                    <span id="item-modal-price" class="text-lg font-bold text-cafe-800 bg-cafe-100 px-3 py-1 rounded-xl whitespace-nowrap"></span>
+                </div>
+                <div class="h-px w-full bg-cafe-100 mb-4"></div>
+                <p id="item-modal-desc" class="text-gray-600 leading-relaxed text-sm sm:text-base"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden p-8 transform scale-95 transition-all duration-300" id="login-modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-serif text-2xl font-bold text-cafe-900">Admin Login</h2>
+                <button onclick="window.closeLoginModal()" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="login-user" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="login-pass" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                </div>
+                <p id="login-error" class="text-red-500 text-sm hidden">Invalid username or password.</p>
+                <button type="submit" class="w-full bg-cafe-800 text-white font-medium py-2 rounded-lg hover:bg-cafe-900 transition-colors mt-4">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 md:p-6 overflow-y-auto modal-overlay transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300" id="admin-modal-content">
+            
+            <div class="flex justify-between items-center p-6 border-b border-gray-100 bg-gray-50 shrink-0">
+                <h2 class="font-serif text-2xl font-bold text-cafe-900 flex items-center gap-2">
+                    <i class="ph ph-wrench text-cafe-500"></i> Admin Dashboard
+                </h2>
+                <button onclick="window.closeAdminPanel()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <div class="flex px-6 border-b border-gray-200 bg-white shrink-0 overflow-x-auto custom-scrollbar whitespace-nowrap">
+                <button onclick="window.switchAdminTab('tab-menu')" id="btn-tab-menu" class="admin-tab active py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Menu Items</button>
+                <button onclick="window.switchAdminTab('tab-categories')" id="btn-tab-categories" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Categories</button>
+                <button onclick="window.switchAdminTab('tab-settings')" id="btn-tab-settings" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Site Settings</button>
+                <button onclick="window.switchAdminTab('tab-security')" id="btn-tab-security" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Security</button>
+            </div>
+
+            <div class="flex-grow overflow-y-auto bg-gray-50">
+                
+                <!-- TAB 1: Menu Items -->
+                <div id="tab-menu" class="admin-tab-content active p-0 md:p-6">
+                    <div class="flex flex-col md:flex-row gap-6 md:bg-transparent bg-white">
+                        <div class="p-6 md:p-0 md:w-1/2 bg-white md:bg-transparent rounded-xl">
+                            <div class="bg-white md:p-6 md:rounded-xl md:shadow-sm md:border border-gray-100">
+                                <h3 id="form-title" class="text-lg font-semibold text-gray-800 mb-4">Add New Menu Item</h3>
+                                <form id="item-form" class="space-y-4">
+                                    <input type="hidden" id="item-id">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                        <select id="item-category" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                                        <input type="text" id="item-name" required placeholder="e.g. Classic Cappuccino" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
+                                        <input type="number" step="1" id="item-price" required placeholder="e.g. 150" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                        <textarea id="item-desc" rows="3" placeholder="Brief description..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none resize-none"></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Image URL (Optional)</label>
+                                        <input type="url" id="item-image" placeholder="https://example.com/image.jpg" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div class="flex gap-3 pt-4">
+                                        <button type="submit" id="btn-save-item" class="flex-1 bg-cafe-600 text-white font-medium py-2 rounded-lg hover:bg-cafe-700 transition-colors">Save Item</button>
+                                        <button type="button" onclick="window.resetItemForm()" class="flex-1 bg-gray-100 text-gray-700 font-medium py-2 rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-0 md:w-1/2 flex flex-col">
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex justify-between items-center">
+                                    Manage Items
+                                    <span id="item-count-badge" class="bg-cafe-100 text-cafe-800 text-xs py-1 px-2 rounded-full font-bold">0</span>
+                                </h3>
+                                <div id="admin-item-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 450px;">
+                                    <!-- Populated via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 1.5: Categories -->
+                <div id="tab-categories" class="admin-tab-content p-0 md:p-6">
+                    <div class="flex flex-col md:flex-row gap-6 md:bg-transparent bg-white">
+                        <div class="p-6 md:p-0 md:w-1/2 bg-white md:bg-transparent rounded-xl">
+                            <div class="bg-white md:p-6 md:rounded-xl md:shadow-sm md:border border-gray-100">
+                                <h3 id="cat-form-title" class="text-lg font-semibold text-gray-800 mb-4">Add New Category</h3>
+                                <form id="category-form" class="space-y-4">
+                                    <input type="hidden" id="cat-id">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Category Title</label>
+                                        <input type="text" id="cat-title" required placeholder="e.g. Cold Beverages" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Footer Note (Optional)</label>
+                                        <input type="text" id="cat-footer" placeholder="e.g. *All drinks can be made vegan" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Display Order</label>
+                                        <input type="number" id="cat-order" value="1" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                                    </div>
+                                    <div class="flex gap-3 pt-4">
+                                        <button type="submit" id="btn-save-cat" class="flex-1 bg-cafe-600 text-white font-medium py-2 rounded-lg hover:bg-cafe-700 transition-colors">Save Category</button>
+                                        <button type="button" onclick="window.resetCategoryForm()" class="flex-1 bg-gray-100 text-gray-700 font-medium py-2 rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-0 md:w-1/2 flex flex-col">
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Manage Categories</h3>
+                                <div id="admin-category-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 450px;">
+                                    <!-- Populated via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Site Settings -->
+                <div id="tab-settings" class="admin-tab-content p-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-3xl mx-auto">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">Update Website Content</h3>
+                        <form id="settings-form" class="space-y-6">
+                            
+                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
+                                <h4 class="font-medium text-cafe-800">Branding</h4>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cafe Name (Logo Text)</label>
+                                    <input type="text" id="set-logo" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Upload Logo Image (Optional)</label>
+                                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                                        <input type="file" id="set-logo-file" accept="image/*" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-cafe-50 file:text-cafe-700 hover:file:bg-cafe-100 transition-colors">
+                                        <div class="flex items-center gap-4">
+                                            <img id="settings-logo-preview" class="h-12 w-auto object-contain hidden border rounded p-1 bg-white">
+                                            <button type="button" id="btn-remove-logo" class="hidden text-sm text-red-600 hover:text-red-800 font-medium">Remove</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">Uploading an image replaces the text logo.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
+                                <h4 class="font-medium text-cafe-800">About Us</h4>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Our Story</label>
+                                    <textarea id="set-about" rows="5" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500 resize-y"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
+                                <h4 class="font-medium text-cafe-800">Contact Details</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                        <input type="text" id="set-phone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Location / Address</label>
+                                        <input type="text" id="set-location" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Opening Hours</label>
+                                    <textarea id="set-hours" rows="2" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-cafe-500 resize-y"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg space-y-4">
+                                <h4 class="font-medium text-cafe-800">Social Media Links (URLs)</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Instagram</label><input type="url" id="set-ig" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">Facebook</label><input type="url" id="set-fb" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                    <div><label class="block text-xs font-medium text-gray-700 mb-1">WhatsApp</label><input type="url" id="set-wa" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-cafe-500 text-sm"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end pt-2">
+                                <button type="submit" id="btn-save-settings" class="bg-cafe-800 text-white font-medium py-2 px-8 rounded-lg hover:bg-cafe-900 transition-colors shadow">Save Settings</button>
+                            </div>
+                            <p id="settings-success" class="text-green-600 text-sm text-right hidden">Settings saved securely to cloud!</p>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Security -->
+                <div id="tab-security" class="admin-tab-content p-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-md mx-auto">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2 text-red-600 flex items-center gap-2">
+                            <i class="ph ph-lock-key"></i> Update Credentials
+                        </h3>
+                        <form id="security-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">New Admin Username</label>
+                                <input type="text" id="set-username" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-red-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                <input type="password" id="set-password" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-red-500">
+                            </div>
+                            <button type="submit" id="btn-save-security" class="w-full bg-red-600 text-white font-medium py-2 rounded-lg hover:bg-red-700 transition-colors mt-4">Update Login</button>
+                            <p id="security-success" class="text-green-600 text-sm text-center hidden mt-2">Credentials updated in cloud.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        /* 
+        ========================================================================
+        GITHUB-IL HOST CHEYYUMBOL SHRADHIKKUKA!
+        Njan aadyam add cheytha cloud database preview window-il mathrame work aavu.
+        Ningal ithu Github-il host cheythu kazhinjal, live data save aavan aayi 
+        ningalude swantham Firebase Database create cheythu athinte config details 
+        thazhe 'myFirebaseConfig' -il paste cheyyanam. 
+        ========================================================================
+        */
+        const myFirebaseConfig = {
+            apiKey: "AIzaSyAP_juucRmKbX3ke0MZ34gyYad3UsHAewM",
+            authDomain: "sipandsmile-fd18f.firebaseapp.com",
+            databaseURL: "https://sipandsmile-fd18f-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sipandsmile-fd18f",
+            storageBucket: "sipandsmile-fd18f.firebasestorage.app",
+            messagingSenderId: "824847499019",
+            appId: "1:824847499019:web:d8a7e4bf133db641816c0e",
+            measurementId: "G-923LNSF1Q8"
+        };
+
+        // Determine which config to use (Platform config for preview, or Custom config for Github)
+        const isCustomConfigAdded = myFirebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+        const platformConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = isCustomConfigAdded ? myFirebaseConfig : platformConfig;
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sip-and-smile-v1';
+        
+        let app, db, auth;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+        } catch (e) {
+            console.error("Firebase init failed. Did you add your config?", e);
+            document.getElementById('menu-loading').innerHTML = '<p class="text-red-500 font-medium">Database connection failed.</p><p class="text-sm mt-2">If hosted on GitHub, please add your Firebase Config to the code.</p>';
+        }
+
+        // Firestore Paths mapping strictly to MANDATORY RULES
+        const menuCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'menuItems');
+        const categoriesCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'categories');
+        const settingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
+
+        // State Management
+        let menuItems = []; 
+        let categoriesDef = []; 
+        
+        let siteSettings = {
+            adminUser: 'sip', adminPass: 'smile',
+            logoText: 'Sip & Smile', logoImage: '',
+            aboutText: 'Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.',
+            contactPhone: '+91 9995308082', contactLocation: 'Kozhikode, Kerala, India',
+            contactHours: 'Mon-Sat: 8am - 9pm\nSun: Closed',
+            socialIG: '#', socialFB: '#', socialWA: '#'
+        };
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        async function initializeData() {
+            try {
+                if (!isCustomConfigAdded && typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    // Fallback to anonymous auth if using custom config on github
+                    try {
+                        await signInAnonymously(auth);
+                    } catch (authError) {
+                        console.error("Auth Error:", authError);
+                        document.getElementById('menu-loading').innerHTML = `
+                            <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
+                                <i class="ph ph-warning-circle text-4xl text-red-500 mb-2"></i>
+                                <p class="text-red-700 font-bold text-lg">Login Setup Incomplete</p>
+                                <p class="text-sm mt-2 text-gray-700">Firebase-il <b>Authentication -> Anonymous</b> enable cheythittilla.</p>
+                                <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${authError.message}</p>
+                            </div>`;
+                        return;
+                    }
+                }
+
+                if (!auth.currentUser) return;
+
+                // Listen to Global Settings
+                onSnapshot(settingsDocRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        siteSettings = { ...siteSettings, ...snapshot.data() };
+                    } else {
+                        setDoc(settingsDocRef, siteSettings);
+                    }
+                    applySiteSettingsToDOM();
+                    populateSettingsForm();
+                    populateSecurityForm();
+                }, (error) => console.error("Settings error:", error));
+
+                // Listen to Categories
+                onSnapshot(categoriesCollectionRef, (snapshot) => {
+                    categoriesDef = [];
+                    snapshot.forEach((docSnap) => {
+                        categoriesDef.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    // Sort by order
+                    categoriesDef.sort((a, b) => (a.order || 0) - (b.order || 0));
+                    
+                    // Seeding default categories if completely empty (to prevent breaking old items)
+                    if (categoriesDef.length === 0) {
+                        setDoc(doc(categoriesCollectionRef, 'espresso'), { title: 'Espresso Bar', footer: '* Choice of milk: Regular, Oat (+₹30), Almond (+₹30)', order: 1 });
+                        setDoc(doc(categoriesCollectionRef, 'specialty'), { title: 'Specialty Drinks', order: 2 });
+                        setDoc(doc(categoriesCollectionRef, 'pastries'), { title: 'Pastries & Bites', order: 3 });
+                    }
+
+                    populateCategoryDropdown();
+                    renderCategoryList();
+                    renderMenu(); // Re-render menu incase category titles changed
+                }, (error) => {
+                    console.error("Category error:", error);
+                    document.getElementById('menu-loading').innerHTML = `
+                        <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
+                            <i class="ph ph-database text-4xl text-red-500 mb-2"></i>
+                            <p class="text-red-700 font-bold text-lg">Database Error</p>
+                            <p class="text-sm mt-2 text-gray-700">Firestore Database create cheythittilla, allengil Rules 'Test Mode'-il alla.</p>
+                            <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${error.message}</p>
+                        </div>`;
+                });
+
+                // Listen to Menu Items
+                onSnapshot(menuCollectionRef, (snapshot) => {
+                    menuItems = [];
+                    snapshot.forEach((docSnap) => {
+                        menuItems.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    document.getElementById('menu-loading').classList.add('hidden');
+                    renderMenu();
+                    renderAdminList();
+                }, (error) => {
+                    console.error("Menu error:", error);
+                    if(!document.getElementById('menu-loading').classList.contains('hidden')) {
+                        document.getElementById('menu-loading').innerHTML = `
+                            <div class="text-center bg-red-50 p-6 rounded-xl border border-red-200">
+                                <i class="ph ph-database text-4xl text-red-500 mb-2"></i>
+                                <p class="text-red-700 font-bold text-lg">Database Permission Denied</p>
+                                <p class="text-sm mt-2 text-gray-700">Firebase Rules update cheyyuka.</p>
+                                <p class="text-xs mt-3 text-red-500 font-mono bg-white p-2 rounded">${error.message}</p>
+                            </div>`;
+                    }
+                });
+
+            } catch (error) {
+                console.error("Init failed:", error);
+            }
+        }
+
+        function applySiteSettingsToDOM() {
+            const navImg = document.getElementById('display-logo-img');
+            const navText = document.getElementById('display-logo-text');
+            const navIcon = document.getElementById('display-logo-icon');
+            const footerImg = document.getElementById('footer-logo-img');
+            const footerText = document.getElementById('footer-logo-text');
+
+            if (siteSettings.logoImage) {
+                navImg.src = siteSettings.logoImage;
+                navImg.classList.remove('hidden');
+                navText.classList.add('hidden');
+                navIcon.classList.add('hidden');
+                
+                footerImg.src = siteSettings.logoImage;
+                footerImg.classList.remove('hidden');
+                footerText.classList.add('hidden');
+            } else {
+                navImg.classList.add('hidden');
+                navText.classList.remove('hidden');
+                navIcon.classList.remove('hidden');
+                navText.textContent = siteSettings.logoText;
+                
+                footerImg.classList.add('hidden');
+                footerText.classList.remove('hidden');
+                footerText.textContent = siteSettings.logoText;
+            }
+            
+            document.getElementById('display-about-text').textContent = siteSettings.aboutText;
+            document.getElementById('display-phone').textContent = siteSettings.contactPhone;
+            document.getElementById('display-location').textContent = siteSettings.contactLocation;
+            document.getElementById('display-hours').textContent = siteSettings.contactHours;
+            
+            document.getElementById('display-social-ig').href = siteSettings.socialIG || '#';
+            document.getElementById('display-social-fb').href = siteSettings.socialFB || '#';
+            document.getElementById('display-social-wa').href = siteSettings.socialWA || '#';
+            document.title = `${siteSettings.logoText} | Menu`;
+        }
+
+        function populateCategoryDropdown() {
+            const select = document.getElementById('item-category');
+            select.innerHTML = '';
+            if(categoriesDef.length === 0) {
+                select.innerHTML = '<option value="" disabled selected>Please add a Category first</option>';
+            }
+            categoriesDef.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.title;
+                select.appendChild(opt);
+            });
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+
+            if (menuItems.length === 0) {
+                container.innerHTML = '<div class="text-center py-16 bg-white rounded-2xl shadow-sm border border-cafe-100"><i class="ph ph-coffee text-6xl text-cafe-300 mb-4 inline-block"></i><p class="text-lg text-cafe-600 font-medium">Menu is currently being updated.</p><p class="text-cafe-400 mt-2">Please check back soon!</p></div>';
+                return;
+            }
+
+            categoriesDef.forEach(cat => {
+                const itemsInCat = menuItems.filter(item => item.category === cat.id);
+                if (itemsInCat.length > 0) {
+                    const section = document.createElement('section');
+                    section.id = cat.id;
+                    section.className = 'mb-24 scroll-mt-24 reveal-on-scroll is-visible'; 
+
+                    const headerHTML = `
+                        <div class="flex items-center gap-4 mb-10">
+                            <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800">${escapeHTML(cat.title)}</h2>
+                            <div class="flex-grow h-px bg-cafe-200"></div>
+                        </div>
+                    `;
+                    
+                    const grid = document.createElement('div');
+                    grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8';
+
+                    itemsInCat.forEach(item => {
+                        const itemCard = document.createElement('div');
+                        itemCard.className = 'menu-item-card group p-4 -m-4 rounded-xl flex justify-between items-start cursor-pointer';
+                        itemCard.setAttribute('onclick', `window.openItemModal('${item.id}')`);
+                        
+                        let imageHTML = '';
+                        if (item.image || cat.id.toLowerCase().includes('pastr')) {
+                            const imgSrc = item.image || `https://placehold.co/150x150/eaddd7/6f4f40?text=${encodeURIComponent(item.name.split(' ')[0])}`;
+                            imageHTML = `
+                                <div class="w-16 h-16 rounded-lg bg-cafe-100 flex-shrink-0 overflow-hidden shadow-sm mr-4 hidden sm:block">
+                                    <img src="${imgSrc}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/eaddd7/6f4f40?text=Item'">
+                                </div>
+                            `;
+                        }
+
+                        const formattedPrice = `₹${parseFloat(item.price).toFixed(2)}`;
+                        itemCard.innerHTML = `
+                            <div class="flex flex-1 pr-4">
+                                ${imageHTML}
+                                <div>
+                                    <h3 class="font-serif text-xl font-semibold text-cafe-900 group-hover:text-cafe-600 transition-colors">${escapeHTML(item.name)}</h3>
+                                    <p class="text-sm text-gray-500 mt-1 line-clamp-2">${escapeHTML(item.desc)}</p>
+                                </div>
+                            </div>
+                            <div class="font-medium text-cafe-800 whitespace-nowrap pl-4 pt-1">${formattedPrice}</div>
+                        `;
+                        grid.appendChild(itemCard);
+                    });
+
+                    section.innerHTML = headerHTML;
+                    section.appendChild(grid);
+
+                    if (cat.footer) {
+                        const footerEl = document.createElement('div');
+                        footerEl.className = 'mt-6 text-sm text-gray-400 italic';
+                        footerEl.textContent = cat.footer;
+                        section.appendChild(footerEl);
+                    }
+
+                    container.appendChild(section);
+                }
+            });
+        }
+
+        window.openItemModal = (id) => {
+            const item = menuItems.find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById('item-modal-name').textContent = item.name;
+            document.getElementById('item-modal-price').textContent = `₹${parseFloat(item.price).toFixed(2)}`;
+            document.getElementById('item-modal-desc').textContent = item.desc;
+            
+            const catDef = categoriesDef.find(c => c.id === item.category);
+            document.getElementById('item-modal-category').textContent = catDef ? catDef.title : item.category;
+
+            const imgContainer = document.getElementById('item-modal-img-container');
+            const imgEl = document.getElementById('item-modal-img');
+            const contentDiv = document.querySelector('#item-modal-content > .p-6');
+            
+            if (item.image || (catDef && catDef.id.toLowerCase().includes('pastr'))) {
+                imgContainer.classList.remove('hidden');
+                contentDiv.classList.add('-mt-4', 'rounded-t-3xl');
+                imgEl.src = item.image || `https://placehold.co/400x300/eaddd7/6f4f40?text=${encodeURIComponent(item.name.split(' ')[0])}`;
+                imgEl.onerror = () => { imgEl.src = 'https://placehold.co/400x300/eaddd7/6f4f40?text=Item'; };
+            } else {
+                imgContainer.classList.add('hidden');
+                contentDiv.classList.remove('-mt-4', 'rounded-t-3xl');
+            }
+
+            const modal = document.getElementById('item-modal');
+            const content = document.getElementById('item-modal-content');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            void modal.offsetWidth; 
+            modal.classList.replace('opacity-0', 'opacity-100');
+            content.classList.replace('scale-95', 'scale-100');
+            document.body.style.overflow = 'hidden'; 
+        };
+
+        window.closeItemModal = () => {
+            const modal = document.getElementById('item-modal');
+            const content = document.getElementById('item-modal-content');
+            modal.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        window.closeItemModalOnOutsideClick = (event) => {
+            if (event.target.id === 'item-modal') window.closeItemModal();
+        };
+
+        window.openLoginModal = () => {
+            const modal = document.getElementById('login-modal');
+            const content = document.getElementById('login-modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('login-form').reset();
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                modal.classList.replace('opacity-0', 'opacity-100');
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        };
+
+        window.closeLoginModal = () => {
+            const modal = document.getElementById('login-modal');
+            const content = document.getElementById('login-modal-content');
+            modal.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        window.openAdminPanel = () => {
+            const modal = document.getElementById('admin-modal');
+            const content = document.getElementById('admin-modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            window.switchAdminTab('tab-menu');
+            
+            setTimeout(() => {
+                modal.classList.replace('opacity-0', 'opacity-100');
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        };
+
+        window.closeAdminPanel = () => {
+            const modal = document.getElementById('admin-modal');
+            const content = document.getElementById('admin-modal-content');
+            modal.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+            window.resetItemForm();
+            window.resetCategoryForm();
+        };
+
+        window.switchAdminTab = (tabId) => {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+        };
+
+        function renderAdminList() {
+            const listContainer = document.getElementById('admin-item-list');
+            document.getElementById('item-count-badge').textContent = menuItems.length;
+            listContainer.innerHTML = '';
+
+            if (menuItems.length === 0) {
+                listContainer.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">No items found.</p>';
+                return;
+            }
+
+            categoriesDef.forEach(cat => {
+                const itemsInCat = menuItems.filter(i => i.category === cat.id);
+                if (itemsInCat.length === 0) return;
+
+                const catHeader = document.createElement('h4');
+                catHeader.className = 'text-xs font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2 first:mt-0';
+                catHeader.textContent = cat.title;
+                listContainer.appendChild(catHeader);
+
+                itemsInCat.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'bg-white p-3 rounded-lg border border-gray-200 flex justify-between items-center group shadow-sm hover:border-cafe-300 transition-colors mb-2';
+                    itemEl.innerHTML = `
+                        <div class="truncate pr-4 flex-1">
+                            <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(item.name)}</p>
+                            <p class="text-xs text-gray-500">₹${parseFloat(item.price).toFixed(2)}</p>
+                        </div>
+                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="window.editItem('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit">
+                                <i class="ph ph-pencil-simple"></i>
+                            </button>
+                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete">
+                                <i class="ph ph-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    listContainer.appendChild(itemEl);
+                });
+            });
+        }
+
+        function renderCategoryList() {
+            const listContainer = document.getElementById('admin-category-list');
+            listContainer.innerHTML = '';
+
+            if (categoriesDef.length === 0) {
+                listContainer.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">No categories found.</p>';
+                return;
+            }
+
+            categoriesDef.forEach(cat => {
+                const catEl = document.createElement('div');
+                catEl.className = 'bg-white p-3 rounded-lg border border-gray-200 flex justify-between items-center group shadow-sm hover:border-cafe-300 transition-colors mb-2';
+                catEl.innerHTML = `
+                    <div class="truncate pr-4 flex-1">
+                        <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(cat.title)}</p>
+                        <p class="text-xs text-gray-500">Order: ${cat.order || 0}</p>
+                    </div>
+                    <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onclick="window.editCategory('${cat.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit">
+                            <i class="ph ph-pencil-simple"></i>
+                        </button>
+                        <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete">
+                            <i class="ph ph-trash"></i>
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(catEl);
+            });
+        }
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            if (user === siteSettings.adminUser && pass === siteSettings.adminPass) {
+                window.closeLoginModal();
+                window.openAdminPanel();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        });
+
+        // MENU ITEM CRUD
+        document.getElementById('item-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+
+            const submitBtn = document.getElementById('btn-save-item');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving...';
+            submitBtn.disabled = true;
+
+            const id = document.getElementById('item-id').value;
+            const catVal = document.getElementById('item-category').value;
+            
+            if(!catVal) {
+                alert("Please select a category.");
+                submitBtn.textContent = originalText; submitBtn.disabled = false; return;
+            }
+
+            const newItemData = {
+                category: catVal,
+                name: document.getElementById('item-name').value,
+                price: document.getElementById('item-price').value,
+                desc: document.getElementById('item-desc').value,
+                image: document.getElementById('item-image').value
+            };
+
+            try {
+                if (id) {
+                    await setDoc(doc(menuCollectionRef, id), newItemData);
+                } else {
+                    await addDoc(menuCollectionRef, newItemData);
+                }
+                window.resetItemForm();
+                submitBtn.textContent = 'Saved!';
+                submitBtn.classList.replace('bg-cafe-600', 'bg-green-600');
+            } catch (error) {
+                console.error("Error saving item:", error);
+                submitBtn.textContent = 'Error!';
+            }
+
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.replace('bg-green-600', 'bg-cafe-600');
+            }, 1500);
+        });
+
+        window.editItem = (id) => {
+            const item = menuItems.find(i => i.id === id);
+            if (!item) return;
+            document.getElementById('form-title').textContent = 'Edit Menu Item';
+            document.getElementById('item-id').value = item.id;
+            document.getElementById('item-category').value = item.category;
+            document.getElementById('item-name').value = item.name;
+            document.getElementById('item-price').value = item.price;
+            document.getElementById('item-desc').value = item.desc;
+            document.getElementById('item-image').value = item.image || '';
+        };
+
+        window.deleteItem = async (id) => {
+            if (!auth.currentUser) return;
+            try {
+                await deleteDoc(doc(menuCollectionRef, id));
+                if (document.getElementById('item-id').value === id) window.resetItemForm();
+            } catch(e) { console.error("Error deleting item:", e); }
+        };
+
+        window.resetItemForm = () => {
+            document.getElementById('form-title').textContent = 'Add New Menu Item';
+            document.getElementById('item-form').reset();
+            document.getElementById('item-id').value = '';
+        };
+
+        // CATEGORY CRUD
+        document.getElementById('category-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+
+            const submitBtn = document.getElementById('btn-save-cat');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving...';
+            submitBtn.disabled = true;
+
+            const id = document.getElementById('cat-id').value;
+            const newCatData = {
+                title: document.getElementById('cat-title').value,
+                footer: document.getElementById('cat-footer').value,
+                order: parseInt(document.getElementById('cat-order').value) || 1
+            };
+
+            try {
+                if (id) {
+                    await setDoc(doc(categoriesCollectionRef, id), newCatData);
+                } else {
+                    await addDoc(categoriesCollectionRef, newCatData);
+                }
+                window.resetCategoryForm();
+                submitBtn.textContent = 'Saved!';
+                submitBtn.classList.replace('bg-cafe-600', 'bg-green-600');
+            } catch (error) {
+                console.error("Error saving category:", error);
+                submitBtn.textContent = 'Error!';
+            }
+
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.replace('bg-green-600', 'bg-cafe-600');
+            }, 1500);
+        });
+
+        window.editCategory = (id) => {
+            const cat = categoriesDef.find(i => i.id === id);
+            if (!cat) return;
+            document.getElementById('cat-form-title').textContent = 'Edit Category';
+            document.getElementById('cat-id').value = cat.id;
+            document.getElementById('cat-title').value = cat.title;
+            document.getElementById('cat-footer').value = cat.footer || '';
+            document.getElementById('cat-order').value = cat.order || 1;
+        };
+
+        window.deleteCategory = async (id) => {
+            if (!auth.currentUser) return;
+            // Basic protection so they don't delete categories that have items easily without warning
+            const hasItems = menuItems.some(i => i.category === id);
+            if(hasItems) {
+                // Not using alert per rules, but a custom UI log would be better. Just simple error for now.
+                console.warn("Cannot delete category with items. Delete items first.");
+                return;
+            }
+            try {
+                await deleteDoc(doc(categoriesCollectionRef, id));
+                if (document.getElementById('cat-id').value === id) window.resetCategoryForm();
+            } catch(e) { console.error("Error deleting category:", e); }
+        };
+
+        window.resetCategoryForm = () => {
+            document.getElementById('cat-form-title').textContent = 'Add New Category';
+            document.getElementById('category-form').reset();
+            document.getElementById('cat-id').value = '';
+            document.getElementById('cat-order').value = categoriesDef.length + 1;
+        };
+
+        let tempLogoImage = '';
+
+        function populateSettingsForm() {
+            document.getElementById('set-logo').value = siteSettings.logoText;
+            
+            tempLogoImage = siteSettings.logoImage || '';
+            const preview = document.getElementById('settings-logo-preview');
+            const removeBtn = document.getElementById('btn-remove-logo');
+            
+            if (tempLogoImage) {
+                preview.src = tempLogoImage;
+                preview.classList.remove('hidden');
+                removeBtn.classList.remove('hidden');
+            } else {
+                preview.classList.add('hidden');
+                removeBtn.classList.add('hidden');
+            }
+            
+            document.getElementById('set-logo-file').value = '';
+            document.getElementById('set-about').value = siteSettings.aboutText;
+            document.getElementById('set-phone').value = siteSettings.contactPhone;
+            document.getElementById('set-location').value = siteSettings.contactLocation;
+            document.getElementById('set-hours').value = siteSettings.contactHours;
+            document.getElementById('set-ig').value = siteSettings.socialIG || '';
+            document.getElementById('set-fb').value = siteSettings.socialFB || '';
+            document.getElementById('set-wa').value = siteSettings.socialWA || '';
+        }
+
+        // Compress image before saving to DB
+        document.getElementById('set-logo-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 300;
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        canvas.width = width; canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        tempLogoImage = canvas.toDataURL('image/webp', 0.8);
+                        const preview = document.getElementById('settings-logo-preview');
+                        preview.src = tempLogoImage;
+                        preview.classList.remove('hidden');
+                        document.getElementById('btn-remove-logo').classList.remove('hidden');
+                    }
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('btn-remove-logo').addEventListener('click', function() {
+            tempLogoImage = '';
+            document.getElementById('set-logo-file').value = '';
+            document.getElementById('settings-logo-preview').classList.add('hidden');
+            this.classList.add('hidden');
+        });
+
+        document.getElementById('settings-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+            
+            const submitBtn = document.getElementById('btn-save-settings');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving...';
+            
+            siteSettings.logoText = document.getElementById('set-logo').value;
+            siteSettings.logoImage = tempLogoImage;
+            siteSettings.aboutText = document.getElementById('set-about').value;
+            siteSettings.contactPhone = document.getElementById('set-phone').value;
+            siteSettings.contactLocation = document.getElementById('set-location').value;
+            siteSettings.contactHours = document.getElementById('set-hours').value;
+            siteSettings.socialIG = document.getElementById('set-ig').value;
+            siteSettings.socialFB = document.getElementById('set-fb').value;
+            siteSettings.socialWA = document.getElementById('set-wa').value;
+
+            try {
+                await setDoc(settingsDocRef, siteSettings);
+                const successMsg = document.getElementById('settings-success');
+                successMsg.classList.remove('hidden');
+                setTimeout(() => successMsg.classList.add('hidden'), 3000);
+            } catch(error) { console.error("Error saving settings", error); }
+            
+            submitBtn.textContent = originalText;
+        });
+
+        function populateSecurityForm() {
+            document.getElementById('set-username').value = siteSettings.adminUser;
+            document.getElementById('set-password').value = siteSettings.adminPass;
+        }
+
+        document.getElementById('security-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!auth.currentUser) return;
+            
+            const newUser = document.getElementById('set-username').value;
+            const newPass = document.getElementById('set-password').value;
+            
+            if(newUser && newPass) {
+                siteSettings.adminUser = newUser;
+                siteSettings.adminPass = newPass;
+                try {
+                    await setDoc(settingsDocRef, siteSettings);
+                    const successMsg = document.getElementById('security-success');
+                    successMsg.classList.remove('hidden');
+                    setTimeout(() => successMsg.classList.add('hidden'), 3000);
+                } catch(error) { console.error("Error saving security", error); }
+            }
+        });
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, 
+                tag => ({'&': '&amp;','<': '&lt;','>': '&gt;',"'": '&#39;','"': '&quot;'}[tag] || tag)
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex');
+                });
+            });
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex');
+            });
+
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-cream/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                    navbar.classList.remove('bg-transparent', 'py-4');
+                } else {
+                    navbar.classList.add('bg-transparent', 'py-4');
+                    navbar.classList.remove('bg-cream/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                }
+            });
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.15 });
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
+            // Dynamic mutation observer to catch dynamically added sections
+            const mutationObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && node.classList.contains('reveal-on-scroll')) {
+                            observer.observe(node);
+                        }
+                    });
+                });
+            });
+            mutationObserver.observe(document.getElementById('menu-container'), { childList: true });
+        });
+    </script>
+</body>
+</html>
