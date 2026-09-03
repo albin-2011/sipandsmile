@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sip & Smile Cafe | Menu</title>
+    <title>Sip & Smile Cafe | Online Ordering</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -49,13 +49,7 @@
             bottom: -2px; left: 0; background-color: #a37c68; transition: width 0.3s ease;
         }
         .category-link:hover::after, .category-link.active::after { width: 100%; }
-        .reveal-on-scroll {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .modal-overlay { backdrop-filter: blur(4px); }
-        .whitespace-pre-wrap { white-space: pre-wrap; }
         .admin-tab { border-bottom: 2px solid transparent; transition: all 0.2s; }
         .admin-tab.active { border-bottom-color: #a37c68; color: #6f4f40; font-weight: 600; }
         .admin-tab-content { display: none; }
@@ -76,19 +70,30 @@
                 <a href="#menu-start" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">Menu</a>
                 <a href="#about" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">About</a>
                 <a href="#contact" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">Contact</a>
-                <button onclick="window.openLoginModal()" class="text-sm font-medium text-cafe-500 hover:text-cafe-700 transition-colors ml-4 border border-cafe-200 px-3 py-1 rounded-full hover:bg-cafe-50">Admin</button>
+                
+                <!-- Cart Trigger Button -->
+                <button onclick="window.openCartModal()" class="relative flex items-center gap-2 bg-cafe-100 hover:bg-cafe-200 text-cafe-800 px-4 py-2 rounded-full font-medium transition-colors">
+                    <i class="ph ph-shopping-cart text-lg"></i>
+                    <span class="text-sm">Cart</span>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-cafe-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden text-cafe-800 p-2 focus:outline-none">
-                <i class="ph ph-list text-2xl"></i>
-            </button>
+            <div class="flex items-center gap-3 md:hidden">
+                <button onclick="window.openCartModal()" class="relative bg-cafe-100 text-cafe-800 p-2 rounded-full">
+                    <i class="ph ph-shopping-cart text-xl"></i>
+                    <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-cafe-600 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button id="mobile-menu-btn" class="text-cafe-800 p-2 focus:outline-none">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
         </div>
 
         <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-cream border-b border-cafe-100 shadow-sm flex-col py-4 px-6 gap-4 items-center">
             <a href="#menu-start" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Menu</a>
             <a href="#about" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">About</a>
             <a href="#contact" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Contact</a>
-            <button onclick="window.openLoginModal(); document.getElementById('mobile-menu').classList.add('hidden');" class="text-cafe-500 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded border border-cafe-200 mt-2">Admin Panel</button>
         </div>
     </nav>
 
@@ -96,22 +101,26 @@
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cafe-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-cafe-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
 
-        <div class="relative max-w-4xl mx-auto px-6 text-center z-10 transition-all duration-700 ease-out translate-y-0 opacity-100">
+        <div class="relative max-w-4xl mx-auto px-6 text-center z-10">
             <p class="text-sm md:text-base font-semibold tracking-widest text-cafe-500 uppercase mb-4">Welcome to your happy place</p>
             <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-cafe-900 mb-6 leading-tight">
                 Every cup is a reason to <span class="italic text-cafe-500">smile.</span>
             </h1>
             <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                A warm atmosphere and a carefully curated menu. Take a moment for yourself and enjoy something special.
+                Order your favorite snacks and warm beverages online for quick delivery or takeaway.
             </p>
             <a href="#menu-start" class="inline-flex items-center gap-2 bg-cafe-800 text-white px-8 py-4 rounded-full font-medium hover:bg-cafe-900 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
-                View Menu <i class="ph ph-arrow-down"></i>
+                Order Online Now <i class="ph ph-arrow-down"></i>
             </a>
         </div>
     </header>
 
     <main class="flex-grow">
         <div id="menu-start" class="max-w-6xl mx-auto px-6 md:px-12 py-20">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-cafe-900 mb-4">Our Cafe Menu</h2>
+                <p class="text-gray-600">Click any item to view details, choose options, or add to cart.</p>
+            </div>
             <div id="menu-loading" class="flex flex-col items-center justify-center py-12 text-cafe-500">
                 <i class="ph ph-spinner animate-spin text-4xl mb-4"></i>
                 <p>Loading our delicious menu...</p>
@@ -120,15 +129,15 @@
         </div>
 
         <section id="about" class="bg-cafe-50 py-20 scroll-mt-20">
-            <div class="max-w-4xl mx-auto px-6 text-center reveal-on-scroll is-visible">
+            <div class="max-w-4xl mx-auto px-6 text-center">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800 mb-6">Our Story</h2>
                 <div class="w-16 h-1 bg-cafe-300 mx-auto mb-8"></div>
-                <p class="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap text-left md:text-center">Established in 2026, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community right here in Wayanad.</p>
+                <p class="text-lg text-gray-700 leading-relaxed text-left md:text-center">Established in Wayanad, Sip & Smile was born from a simple idea: that a great cup of coffee can turn a good day into a great one. We source our beans ethically, bake our pastries fresh daily, and strive to create a welcoming space for everyone in our community.</p>
             </div>
         </section>
 
         <section id="contact" class="py-20 scroll-mt-20">
-            <div class="max-w-6xl mx-auto px-6 md:px-12 reveal-on-scroll is-visible">
+            <div class="max-w-6xl mx-auto px-6 md:px-12">
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
                     <div class="bg-cafe-800 text-cafe-100 p-10 md:p-16 md:w-1/2 flex flex-col justify-center">
                         <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-8">Get in Touch</h2>
@@ -144,25 +153,24 @@
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-map-pin text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Visit Us</h4>
-                                    <p class="text-lg text-white whitespace-pre-wrap">Wayanad, Kerala, India</p>
+                                    <p class="text-lg text-white">Wayanad, Kerala, India</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-cafe-700 p-3 rounded-full shrink-0"><i class="ph ph-clock text-2xl text-cafe-200"></i></div>
                                 <div>
                                     <h4 class="text-sm text-cafe-300 font-semibold uppercase tracking-wider mb-1">Hours</h4>
-                                    <p class="text-lg text-white whitespace-pre-wrap">Mon - Sun: 8:00 AM - 10:00 PM<br>(Open All Days)</p>
+                                    <p class="text-lg text-white">Mon - Sun: 8:00 AM - 10:00 PM</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="md:w-1/2 bg-cafe-200 relative min-h-[300px]">
-                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1000" alt="Cafe Interior" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay" onerror="this.src='https://placehold.co/600x400/eaddd7/6f4f40?text=Cafe'">
-                        <div class="absolute inset-0 flex items-center justify-center p-8">
-                             <div class="text-center bg-white/90 backdrop-blur-sm p-6 rounded-2xl shadow-lg inline-block">
+                        <div class="absolute inset-0 flex items-center justify-center p-8 bg-cafe-900/40">
+                             <div class="text-center bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-xl inline-block">
                                  <i class="ph ph-coffee text-4xl text-cafe-600 mb-2"></i>
-                                 <p class="font-serif text-xl text-cafe-900 font-semibold">We look forward to<br>serving you!</p>
+                                 <p class="font-serif text-xl text-cafe-900 font-semibold">Fresh coffee delivered<br>right to your doorstep!</p>
                              </div>
                         </div>
                     </div>
@@ -174,8 +182,8 @@
     <footer class="bg-cafe-900 text-cafe-100 py-8 border-t border-cafe-800">
         <div class="max-w-6xl mx-auto px-6 text-center text-sm text-cafe-400 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
-                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale">
-                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text">Sip & Smile</span>. All rights reserved.</p>
+                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale cursor-pointer" ondblclick="window.openLoginModal()">
+                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text" class="cursor-pointer" ondblclick="window.openLoginModal()">Sip & Smile</span>. All rights reserved.</p>
             </div>
             <div class="flex gap-4">
                 <a id="display-social-ig" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
@@ -185,6 +193,7 @@
         </div>
     </footer>
 
+    <!-- Item Detail & Add to Cart Modal -->
     <div id="item-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0" onclick="window.closeItemModalOnOutsideClick(event)">
         <div id="item-modal-content" class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-all duration-300 relative flex flex-col max-h-[90vh]">
             <button onclick="window.closeItemModal()" class="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-md p-2 rounded-full text-gray-600 hover:text-cafe-900 hover:bg-white shadow-sm transition-all focus:outline-none">
@@ -194,15 +203,55 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 pointer-events-none"></div>
                 <img id="item-modal-img" src="" alt="Menu Item" class="w-full h-full object-cover relative z-0">
             </div>
-            <div class="p-6 sm:p-8 bg-white relative z-10 overflow-y-auto custom-scrollbar">
+            <div class="p-6 sm:p-8 bg-white relative z-10 overflow-y-auto custom-scrollbar flex-grow">
                 <p id="item-modal-category" class="text-xs font-bold text-cafe-500 uppercase tracking-wider mb-2"></p>
-                <div class="flex justify-between items-start gap-4 mb-4">
+                <div class="flex justify-between items-start gap-4 mb-3">
                     <h3 id="item-modal-name" class="font-serif text-2xl sm:text-3xl font-bold text-cafe-900 leading-tight"></h3>
                     <span id="item-modal-price" class="text-lg font-bold text-cafe-800 bg-cafe-100 px-3 py-1 rounded-xl whitespace-nowrap"></span>
                 </div>
-                <div class="h-px w-full bg-cafe-100 mb-4"></div>
-                <p id="item-modal-desc" class="text-gray-600 leading-relaxed text-sm sm:text-base"></p>
+                <p id="item-modal-desc" class="text-gray-600 leading-relaxed text-sm sm:text-base mb-6"></p>
+                
+                <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+                    <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden">
+                        <button onclick="window.decrementModalQty()" class="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold">-</button>
+                        <span id="modal-item-qty" class="px-4 py-2 text-sm font-semibold text-cafe-900">1</span>
+                        <button onclick="window.incrementModalQty()" class="px-3 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold">+</button>
+                    </div>
+                    <button onclick="window.addModalItemToCart()" class="flex-1 bg-cafe-800 hover:bg-cafe-900 text-white font-medium py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                        <i class="ph ph-shopping-cart text-lg"></i> Add to Cart
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Cart & Checkout Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0" onclick="window.closeCartModalOnOutsideClick(event)">
+        <div id="cart-modal-content" class="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden transform scale-95 transition-all duration-300 relative flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center p-6 border-b border-gray-100 bg-gray-50">
+                <h3 class="font-serif text-2xl font-bold text-cafe-900 flex items-center gap-2">
+                    <i class="ph ph-shopping-cart text-cafe-600"></i> Your Order Cart
+                </h3>
+                <button onclick="window.closeCartModal()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <div id="cart-body" class="p-6 overflow-y-auto custom-scrollbar flex-grow space-y-4">
+                <!-- Cart items or checkout form rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="ph ph-check"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-cafe-900 mb-2">Order Placed Successfully!</h3>
+            <p id="success-order-id" class="text-sm text-gray-500 mb-6"></p>
+            <button onclick="window.closeSuccessModal()" class="w-full bg-cafe-800 text-white font-medium py-3 rounded-xl hover:bg-cafe-900 transition-colors">Continue Shopping</button>
         </div>
     </div>
 
@@ -217,14 +266,10 @@
             </div>
             <form id="login-form" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                    <input type="text" id="login-user" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Passcode</label>
+                    <input type="password" id="login-pass" required placeholder="Enter passcode..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="login-pass" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
-                </div>
-                <p id="login-error" class="text-red-500 text-sm hidden">Invalid username or password.</p>
+                <p id="login-error" class="text-red-500 text-sm hidden">Incorrect passcode!</p>
                 <button type="submit" class="w-full bg-cafe-800 text-white font-medium py-2 rounded-lg hover:bg-cafe-900 transition-colors mt-4">Login</button>
             </form>
         </div>
@@ -244,16 +289,29 @@
             </div>
 
             <div class="flex px-6 border-b border-gray-200 bg-white shrink-0 overflow-x-auto custom-scrollbar whitespace-nowrap">
-                <button onclick="window.switchAdminTab('tab-menu')" id="btn-tab-menu" class="admin-tab active py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Menu Items</button>
+                <button onclick="window.switchAdminTab('tab-orders')" id="btn-tab-orders" class="admin-tab active py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Customer Orders</button>
+                <button onclick="window.switchAdminTab('tab-menu')" id="btn-tab-menu" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Menu Items</button>
                 <button onclick="window.switchAdminTab('tab-categories')" id="btn-tab-categories" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Categories</button>
                 <button onclick="window.switchAdminTab('tab-settings')" id="btn-tab-settings" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Branding & Socials</button>
-                <button onclick="window.switchAdminTab('tab-security')" id="btn-tab-security" class="admin-tab py-3 px-4 text-sm font-medium text-gray-500 hover:text-cafe-700">Security</button>
             </div>
 
             <div class="flex-grow overflow-y-auto bg-gray-50">
                 
+                <!-- TAB 0: Customer Orders -->
+                <div id="tab-orders" class="admin-tab-content active p-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex justify-between items-center">
+                            Incoming Orders
+                            <span id="order-count-badge" class="bg-cafe-100 text-cafe-800 text-xs py-1 px-2 rounded-full font-bold">0</span>
+                        </h3>
+                        <div id="admin-orders-list" class="space-y-4">
+                            <!-- Rendered orders -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- TAB 1: Menu Items -->
-                <div id="tab-menu" class="admin-tab-content active p-0 md:p-6">
+                <div id="tab-menu" class="admin-tab-content p-0 md:p-6">
                     <div class="flex flex-col md:flex-row gap-6 md:bg-transparent bg-white">
                         <div class="p-6 md:p-0 md:w-1/2 bg-white md:bg-transparent rounded-xl">
                             <div class="bg-white md:p-6 md:rounded-xl md:shadow-sm md:border border-gray-100">
@@ -262,9 +320,7 @@
                                     <input type="hidden" id="item-id">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                                        <select id="item-category" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
-                                            <!-- Dynamically populated -->
-                                        </select>
+                                        <select id="item-category" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none"></select>
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
@@ -296,9 +352,7 @@
                                     Manage Items
                                     <span id="item-count-badge" class="bg-cafe-100 text-cafe-800 text-xs py-1 px-2 rounded-full font-bold">0</span>
                                 </h3>
-                                <div id="admin-item-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;">
-                                    <!-- Populated via JS -->
-                                </div>
+                                <div id="admin-item-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;"></div>
                             </div>
                         </div>
                     </div>
@@ -335,9 +389,7 @@
                         <div class="p-6 md:p-0 md:w-1/2 flex flex-col">
                             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Manage Categories</h3>
-                                <div id="admin-category-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;">
-                                    <!-- Populated via JS -->
-                                </div>
+                                <div id="admin-category-list" class="flex-grow overflow-y-auto space-y-3 pr-2 custom-scrollbar" style="max-height: 400px;"></div>
                             </div>
                         </div>
                     </div>
@@ -348,7 +400,6 @@
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
                         <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2">Branding & Social Media Links</h3>
                         <form id="settings-form" class="space-y-6">
-                            
                             <div class="bg-gray-50 p-4 rounded-lg space-y-4">
                                 <h4 class="font-medium text-cafe-800">Cafe Name & Logo</h4>
                                 <div>
@@ -380,27 +431,6 @@
                                 <button type="submit" id="btn-save-settings" class="bg-cafe-800 text-white font-medium py-2 px-8 rounded-lg hover:bg-cafe-900 transition-colors shadow">Save Changes</button>
                             </div>
                             <p id="settings-success" class="text-green-600 text-sm text-right hidden">Settings saved successfully!</p>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- TAB 4: Security -->
-                <div id="tab-security" class="admin-tab-content p-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-md mx-auto">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6 border-b pb-2 text-red-600 flex items-center gap-2">
-                            <i class="ph ph-lock-key"></i> Update Credentials
-                        </h3>
-                        <form id="security-form" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">New Admin Username</label>
-                                <input type="text" id="set-username" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-red-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                                <input type="password" id="set-password" required class="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-red-500">
-                            </div>
-                            <button type="submit" id="btn-save-security" class="w-full bg-red-600 text-white font-medium py-2 rounded-lg hover:bg-red-700 transition-colors mt-4">Update Login</button>
-                            <p id="security-success" class="text-green-600 text-sm text-center hidden mt-2">Credentials updated in cloud.</p>
                         </form>
                     </div>
                 </div>
@@ -436,12 +466,18 @@
 
         const menuCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'menuItems');
         const categoriesCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'categories');
+        const ordersCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'orders');
         const settingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
 
         let menuItems = []; 
         let categoriesDef = []; 
+        let ordersList = [];
+        let cart = [];
+        let activeModalItem = null;
+        let activeModalQty = 1;
+        
         let siteSettings = {
-            adminUser: 'sip', adminPass: 'smile',
+            adminPass: 'smile',
             logoText: 'Sip & Smile', logoImage: '',
             socialIG: '#', socialFB: '#', socialWA: '#'
         };
@@ -470,7 +506,6 @@
                     }
                     applySiteSettingsToDOM();
                     populateSettingsForm();
-                    populateSecurityForm();
                 }, (error) => console.error("Settings error:", error));
 
                 onSnapshot(categoriesCollectionRef, (snapshot) => {
@@ -493,6 +528,15 @@
                     renderMenu();
                     renderAdminList();
                 }, (error) => console.error("Menu error:", error));
+
+                onSnapshot(ordersCollectionRef, (snapshot) => {
+                    ordersList = [];
+                    snapshot.forEach((docSnap) => {
+                        ordersList.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    ordersList.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    renderAdminOrders();
+                }, (error) => console.error("Orders error:", error));
 
             } catch (error) {
                 console.error("Init failed:", error);
@@ -530,7 +574,7 @@
             document.getElementById('display-social-ig').href = siteSettings.socialIG || '#';
             document.getElementById('display-social-fb').href = siteSettings.socialFB || '#';
             document.getElementById('display-social-wa').href = siteSettings.socialWA || '#';
-            document.title = `${siteSettings.logoText || 'Sip & Smile'} | Menu`;
+            document.title = `${siteSettings.logoText || 'Sip & Smile'} | Online Ordering`;
         }
 
         function populateCategoryDropdown() {
@@ -560,56 +604,51 @@
                 if (itemsInCat.length > 0) {
                     const section = document.createElement('section');
                     section.id = cat.id;
-                    section.className = 'mb-24 scroll-mt-24 reveal-on-scroll is-visible'; 
+                    section.className = 'mb-20 scroll-mt-24'; 
 
                     const headerHTML = `
-                        <div class="flex items-center gap-4 mb-10">
-                            <h2 class="font-serif text-3xl md:text-4xl font-bold text-cafe-800">${escapeHTML(cat.title)}</h2>
+                        <div class="flex items-center gap-4 mb-8">
+                            <h3 class="font-serif text-3xl font-bold text-cafe-800">${escapeHTML(cat.title)}</h3>
                             <div class="flex-grow h-px bg-cafe-200"></div>
                         </div>
                     `;
                     
                     const grid = document.createElement('div');
-                    grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8';
+                    grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6';
 
                     itemsInCat.forEach(item => {
                         const itemCard = document.createElement('div');
-                        itemCard.className = 'menu-item-card group p-4 -m-4 rounded-xl flex justify-between items-start cursor-pointer';
+                        itemCard.className = 'menu-item-card bg-white p-5 rounded-2xl border border-cafe-100 shadow-sm flex justify-between items-center cursor-pointer hover:border-cafe-300';
                         itemCard.setAttribute('onclick', `window.openItemModal('${item.id}')`);
                         
                         let imageHTML = '';
                         if (item.image) {
                             imageHTML = `
-                                <div class="w-16 h-16 rounded-lg bg-cafe-100 flex-shrink-0 overflow-hidden shadow-sm mr-4 hidden sm:block">
-                                    <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                <div class="w-20 h-20 rounded-xl bg-cafe-100 flex-shrink-0 overflow-hidden shadow-sm mr-4">
+                                    <img src="${item.image}" alt="${escapeHTML(item.name)}" class="w-full h-full object-cover" onerror="this.style.display='none'">
                                 </div>
                             `;
                         }
 
                         const formattedPrice = `₹${parseFloat(item.price || 0).toFixed(0)}`;
                         itemCard.innerHTML = `
-                            <div class="flex flex-1 pr-4">
+                            <div class="flex flex-1 pr-4 items-center">
                                 ${imageHTML}
-                                <div>
-                                    <h3 class="font-serif text-xl font-semibold text-cafe-900 group-hover:text-cafe-600 transition-colors">${escapeHTML(item.name)}</h3>
-                                    <p class="text-sm text-gray-500 mt-1 line-clamp-2">${escapeHTML(item.desc)}</p>
+                                <div class="flex-1">
+                                    <h4 class="font-serif text-xl font-semibold text-cafe-900">${escapeHTML(item.name)}</h4>
+                                    <p class="text-sm text-gray-500 mt-1 line-clamp-2">${escapeHTML(item.desc || '')}</p>
+                                    <span class="inline-block mt-2 font-bold text-cafe-800">${formattedPrice}</span>
                                 </div>
                             </div>
-                            <div class="font-medium text-cafe-800 whitespace-nowrap pl-4 pt-1">${formattedPrice}</div>
+                            <button onclick="event.stopPropagation(); window.quickAddToCart('${item.id}')" class="bg-cafe-100 hover:bg-cafe-200 text-cafe-800 p-3 rounded-full transition-colors" title="Quick Add">
+                                <i class="ph ph-plus text-lg font-bold"></i>
+                            </button>
                         `;
                         grid.appendChild(itemCard);
                     });
 
                     section.innerHTML = headerHTML;
                     section.appendChild(grid);
-
-                    if (cat.footer) {
-                        const footerEl = document.createElement('div');
-                        footerEl.className = 'mt-6 text-sm text-gray-400 italic';
-                        footerEl.textContent = cat.footer;
-                        section.appendChild(footerEl);
-                    }
-
                     container.appendChild(section);
                 }
             });
@@ -618,10 +657,13 @@
         window.openItemModal = (id) => {
             const item = menuItems.find(i => i.id === id);
             if (!item) return;
+            activeModalItem = item;
+            activeModalQty = 1;
 
             document.getElementById('item-modal-name').textContent = item.name;
             document.getElementById('item-modal-price').textContent = `₹${parseFloat(item.price || 0).toFixed(0)}`;
-            document.getElementById('item-modal-desc').textContent = item.desc;
+            document.getElementById('item-modal-desc').textContent = item.desc || '';
+            document.getElementById('modal-item-qty').textContent = activeModalQty;
             
             const catDef = categoriesDef.find(c => c.id === item.category);
             document.getElementById('item-modal-category').textContent = catDef ? catDef.title : item.category;
@@ -666,6 +708,208 @@
             if (event.target.id === 'item-modal') window.closeItemModal();
         };
 
+        window.incrementModalQty = () => {
+            activeModalQty++;
+            document.getElementById('modal-item-qty').textContent = activeModalQty;
+        };
+
+        window.decrementModalQty = () => {
+            if (activeModalQty > 1) {
+                activeModalQty--;
+                document.getElementById('modal-item-qty').textContent = activeModalQty;
+            }
+        };
+
+        window.quickAddToCart = (id) => {
+            const item = menuItems.find(i => i.id === id);
+            if (!item) return;
+            addToCartObject(item, 1);
+        };
+
+        window.addModalItemToCart = () => {
+            if (!activeModalItem) return;
+            addToCartObject(activeModalItem, activeModalQty);
+            window.closeItemModal();
+        };
+
+        function addToCartObject(item, qty) {
+            const existing = cart.find(c => c.id === item.id);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ id: item.id, name: item.name, price: parseFloat(item.price || 0), qty: qty });
+            }
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const badge = document.getElementById('cart-badge');
+            const badgeMob = document.getElementById('cart-badge-mobile');
+            
+            if (totalCount > 0) {
+                badge.textContent = totalCount;
+                badge.classList.remove('hidden');
+                badgeMob.textContent = totalCount;
+                badgeMob.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+                badgeMob.classList.add('hidden');
+            }
+        }
+
+        window.openCartModal = () => {
+            renderCartContent();
+            const modal = document.getElementById('cart-modal');
+            const content = document.getElementById('cart-modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                modal.classList.replace('opacity-0', 'opacity-100');
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        };
+
+        window.closeCartModal = () => {
+            const modal = document.getElementById('cart-modal');
+            const content = document.getElementById('cart-modal-content');
+            modal.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        window.closeCartModalOnOutsideClick = (event) => {
+            if (event.target.id === 'cart-modal') window.closeCartModal();
+        };
+
+        function renderCartContent() {
+            const body = document.getElementById('cart-body');
+            if (!body) return;
+
+            if (cart.length === 0) {
+                body.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="ph ph-shopping-cart text-5xl text-cafe-300 mb-3 inline-block"></i>
+                        <p class="text-cafe-700 font-medium">Your cart is empty.</p>
+                        <button onclick="window.closeCartModal()" class="mt-4 bg-cafe-800 text-white px-6 py-2 rounded-xl text-sm font-medium">Explore Menu</button>
+                    </div>
+                `;
+                return;
+            }
+
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            let itemsHtml = '<div class="space-y-3 mb-6 divide-y divide-gray-100">';
+            cart.forEach((item, index) => {
+                itemsHtml += `
+                    <div class="pt-3 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-semibold text-cafe-900">${escapeHTML(item.name)}</h4>
+                            <p class="text-xs text-gray-500">₹${item.price} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-cafe-800">₹${item.price * item.qty}</span>
+                            <button onclick="window.removeFromCart(${index})" class="text-red-500 hover:text-red-700 p-1"><i class="ph ph-trash text-lg"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            itemsHtml += '</div>';
+
+            body.innerHTML = `
+                ${itemsHtml}
+                <div class="border-t border-gray-200 pt-4 mb-6">
+                    <div class="flex justify-between text-lg font-bold text-cafe-900">
+                        <span>Total Amount:</span>
+                        <span>₹${subtotal}</span>
+                    </div>
+                </div>
+
+                <form id="checkout-form" onsubmit="window.submitOrder(event)" class="space-y-4 bg-cafe-50 p-5 rounded-2xl border border-cafe-100">
+                    <h4 class="font-serif font-bold text-cafe-900 text-lg mb-2">Delivery Details</h4>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Full Name *</label>
+                        <input type="text" id="cust-name" required placeholder="Enter your name" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Phone Number *</label>
+                        <input type="tel" id="cust-phone" required placeholder="Enter 10-digit mobile number" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Delivery Address *</label>
+                        <textarea id="cust-address" required rows="2" placeholder="House no, street, landmark, area..." class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Payment Method</label>
+                        <div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-gray-200">
+                            <input type="radio" checked id="cod" name="payment" class="text-cafe-600">
+                            <label for="cod" class="text-sm font-medium text-cafe-900">Cash on Delivery (COD)</label>
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-place-order" class="w-full bg-cafe-800 hover:bg-cafe-900 text-white font-medium py-3 rounded-xl transition-colors shadow-md mt-2">
+                        Place Order (₹${subtotal})
+                    </button>
+                </form>
+            `;
+        }
+
+        window.removeFromCart = (index) => {
+            cart.splice(index, 1);
+            updateCartBadge();
+            renderCartContent();
+        };
+
+        window.submitOrder = async (e) => {
+            e.preventDefault();
+            if (!auth.currentUser || cart.length === 0) return;
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            const orderBtn = document.getElementById('btn-place-order');
+            orderBtn.textContent = 'Placing Order...';
+            orderBtn.disabled = true;
+
+            const orderData = {
+                customerName: name,
+                phone: phone,
+                address: address,
+                items: cart,
+                total: subtotal,
+                status: 'Pending',
+                timestamp: Date.now()
+            };
+
+            try {
+                const docRef = await addDoc(ordersCollectionRef, orderData);
+                cart = [];
+                updateCartBadge();
+                window.closeCartModal();
+                
+                document.getElementById('success-order-id').textContent = `Order ID: #${docRef.id.slice(-6).toUpperCase()} • Cash on Delivery`;
+                const successModal = document.getElementById('success-modal');
+                successModal.classList.remove('hidden');
+                successModal.classList.add('flex');
+            } catch (error) {
+                console.error("Order submission failed:", error);
+                alert("Failed to place order. Please try again.");
+                orderBtn.textContent = 'Place Order';
+                orderBtn.disabled = false;
+            }
+        };
+
+        window.closeSuccessModal = () => {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('success-modal').classList.remove('flex');
+        };
+
         window.openLoginModal = () => {
             const modal = document.getElementById('login-modal');
             const content = document.getElementById('login-modal-content');
@@ -692,13 +936,24 @@
             }, 300);
         };
 
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('login-pass').value;
+            if (pass === siteSettings.adminPass) {
+                window.closeLoginModal();
+                window.openAdminPanel();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        });
+
         window.openAdminPanel = () => {
             const modal = document.getElementById('admin-modal');
             const content = document.getElementById('admin-modal-content');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
-            window.switchAdminTab('tab-menu');
+            window.switchAdminTab('tab-orders');
             setTimeout(() => {
                 modal.classList.replace('opacity-0', 'opacity-100');
                 content.classList.replace('scale-95', 'scale-100');
@@ -722,6 +977,58 @@
             document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             document.getElementById(`btn-${tabId}`).classList.add('active');
+        };
+
+        function renderAdminOrders() {
+            const container = document.getElementById('admin-orders-list');
+            if (!container) return;
+            document.getElementById('order-count-badge').textContent = ordersList.length;
+            container.innerHTML = '';
+
+            if (ordersList.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-sm text-center py-6">No orders received yet.</p>';
+                return;
+            }
+
+            ordersList.forEach(order => {
+                const dateStr = new Date(order.timestamp).toLocaleString();
+                let itemsListStr = order.items.map(i => `${i.name} (x${i.qty})`).join(', ');
+
+                const card = document.createElement('div');
+                card.className = 'bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm';
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 mb-3 gap-2">
+                        <div>
+                            <span class="font-bold text-cafe-900 text-base">${escapeHTML(order.customerName)}</span>
+                            <span class="text-xs text-gray-500 ml-2">${dateStr}</span>
+                        </div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full">${order.status || 'Pending'}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-3">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase font-semibold">Contact & Address</p>
+                            <p class="font-medium text-gray-800"><i class="ph ph-phone mr-1"></i> ${escapeHTML(order.phone)}</p>
+                            <p class="text-gray-600 mt-1"><i class="ph ph-map-pin mr-1"></i> ${escapeHTML(order.address)}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase font-semibold">Order Summary</p>
+                            <p class="text-gray-800 font-medium">${escapeHTML(itemsListStr)}</p>
+                            <p class="text-cafe-800 font-bold mt-1">Total: ₹${order.total} (COD)</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2 border-t border-gray-200">
+                        <button onclick="window.deleteOrder('${order.id}')" class="text-xs bg-red-100 hover:bg-red-200 text-red-700 font-medium px-3 py-1.5 rounded-lg transition-colors">Delete Order</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.deleteOrder = async (id) => {
+            if (!auth.currentUser) return;
+            try {
+                await deleteDoc(doc(ordersCollectionRef, id));
+            } catch(e) { console.error("Error deleting order:", e); }
         };
 
         function renderAdminList() {
@@ -752,9 +1059,9 @@
                             <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(item.name)}</p>
                             <p class="text-xs text-gray-500">₹${parseFloat(item.price || 0).toFixed(0)}</p>
                         </div>
-                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="flex gap-2">
                             <button onclick="window.editItem('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
-                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-blue-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
+                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                         </div>
                     `;
                     listContainer.appendChild(itemEl);
@@ -775,7 +1082,7 @@
                         <p class="font-medium text-sm text-gray-800 truncate">${escapeHTML(cat.title)}</p>
                         <p class="text-xs text-gray-500">Order: ${cat.order || 0}</p>
                     </div>
-                    <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div class="flex gap-2">
                         <button onclick="window.editCategory('${cat.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
                         <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                     </div>
@@ -783,18 +1090,6 @@
                 listContainer.appendChild(catEl);
             });
         }
-
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = document.getElementById('login-user').value;
-            const pass = document.getElementById('login-pass').value;
-            if (user === siteSettings.adminUser && pass === siteSettings.adminPass) {
-                window.closeLoginModal();
-                window.openAdminPanel();
-            } else {
-                document.getElementById('login-error').classList.remove('hidden');
-            }
-        });
 
         document.getElementById('item-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -823,7 +1118,6 @@
                 }
                 window.resetItemForm();
                 submitBtn.textContent = 'Saved!';
-                submitBtn.classList.replace('bg-cafe-600', 'bg-green-600');
             } catch (error) {
                 console.error("Error saving item:", error);
                 submitBtn.textContent = 'Error!';
@@ -832,7 +1126,6 @@
             setTimeout(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-                submitBtn.classList.replace('bg-green-600', 'bg-cafe-600');
             }, 1500);
         });
 
@@ -844,7 +1137,7 @@
             document.getElementById('item-category').value = item.category;
             document.getElementById('item-name').value = item.name;
             document.getElementById('item-price').value = item.price;
-            document.getElementById('item-desc').value = item.desc;
+            document.getElementById('item-desc').value = item.desc || '';
             document.getElementById('item-image').value = item.image || '';
         };
 
@@ -886,7 +1179,6 @@
                 }
                 window.resetCategoryForm();
                 submitBtn.textContent = 'Saved!';
-                submitBtn.classList.replace('bg-cafe-600', 'bg-green-600');
             } catch (error) {
                 console.error("Error saving category:", error);
                 submitBtn.textContent = 'Error!';
@@ -895,7 +1187,6 @@
             setTimeout(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-                submitBtn.classList.replace('bg-green-600', 'bg-cafe-600');
             }, 1500);
         });
 
@@ -957,7 +1248,7 @@
                         const canvas = document.createElement('canvas');
                         const MAX_WIDTH = 300;
                         let width = img.width;
-                        let height = img.height;
+                        let height = img.length;
                         if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                         canvas.width = width; canvas.height = height;
                         const ctx = canvas.getContext('2d');
@@ -1005,29 +1296,6 @@
             submitBtn.textContent = originalText;
         });
 
-        function populateSecurityForm() {
-            document.getElementById('set-username').value = siteSettings.adminUser || 'sip';
-            document.getElementById('set-password').value = siteSettings.adminPass || 'smile';
-        }
-
-        document.getElementById('security-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            if (!auth.currentUser) return;
-            const newUser = document.getElementById('set-username').value;
-            const newPass = document.getElementById('set-password').value;
-            
-            if(newUser && newPass) {
-                siteSettings.adminUser = newUser;
-                siteSettings.adminPass = newPass;
-                try {
-                    await setDoc(settingsDocRef, siteSettings);
-                    const successMsg = document.getElementById('security-success');
-                    successMsg.classList.remove('hidden');
-                    setTimeout(() => successMsg.classList.add('hidden'), 3000);
-                } catch(error) { console.error("Error saving security", error); }
-            }
-        });
-
         function escapeHTML(str) {
             if (!str) return '';
             return str.replace(/[&<>'"]/g, 
@@ -1037,6 +1305,14 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initializeData();
+
+            // Hidden shortcut to open admin login: Press Ctrl + Shift + A
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
+                    e.preventDefault();
+                    window.openLoginModal();
+                }
+            });
 
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
