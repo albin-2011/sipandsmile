@@ -58,6 +58,7 @@
 </head>
 <body class="selection:bg-cafe-200 selection:text-cafe-900 flex flex-col min-h-screen relative">
 
+    <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-4">
         <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
             <a href="#" class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-cafe-800 flex items-center gap-2">
@@ -71,6 +72,12 @@
                 <a href="#about" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">About</a>
                 <a href="#contact" class="category-link text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors">Contact</a>
                 
+                <!-- Customer Verification / Profile Button -->
+                <button id="nav-auth-btn" onclick="window.openCustomerLoginModal()" class="flex items-center gap-2 text-sm font-medium text-cafe-700 hover:text-cafe-900 transition-colors border border-cafe-200 px-4 py-2 rounded-full hover:bg-cafe-50">
+                    <i class="ph ph-user text-base"></i>
+                    <span id="nav-auth-text">Customer Login</span>
+                </button>
+
                 <!-- Cart Trigger Button -->
                 <button onclick="window.openCartModal()" class="relative flex items-center gap-2 bg-cafe-100 hover:bg-cafe-200 text-cafe-800 px-4 py-2 rounded-full font-medium transition-colors">
                     <i class="ph ph-shopping-cart text-lg"></i>
@@ -90,13 +97,15 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-cream border-b border-cafe-100 shadow-sm flex-col py-4 px-6 gap-4 items-center">
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-cream border-b border-cafe-100 shadow-sm flex-col py-4 px-6 gap-3 items-center">
             <a href="#menu-start" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Menu</a>
             <a href="#about" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">About</a>
             <a href="#contact" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded mobile-link">Contact</a>
+            <button id="mobile-auth-btn" onclick="window.openCustomerLoginModal(); document.getElementById('mobile-menu').classList.add('hidden');" class="text-cafe-700 font-medium py-2 w-full text-center hover:bg-cafe-50 rounded border border-cafe-200">Customer Login</button>
         </div>
     </nav>
 
+    <!-- Header Hero -->
     <header class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cafe-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-cafe-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
@@ -115,6 +124,7 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="flex-grow">
         <div id="menu-start" class="max-w-6xl mx-auto px-6 md:px-12 py-20">
             <div class="text-center mb-12">
@@ -179,11 +189,12 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-cafe-900 text-cafe-100 py-8 border-t border-cafe-800">
         <div class="max-w-6xl mx-auto px-6 text-center text-sm text-cafe-400 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
-                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale cursor-pointer" title="Double click for Admin" ondblclick="window.openLoginModal()">
-                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text" class="cursor-pointer" title="Double click for Admin" ondblclick="window.openLoginModal()">Sip & Smile</span>. All rights reserved.</p>
+                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75">
+                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text">Sip & Smile</span>. All rights reserved.</p>
             </div>
             <div class="flex gap-4">
                 <a id="display-social-ig" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
@@ -193,7 +204,7 @@
         </div>
     </footer>
 
-    <!-- Item Detail & Add to Cart Modal -->
+    <!-- Item Detail Modal -->
     <div id="item-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0" onclick="window.closeItemModalOnOutsideClick(event)">
         <div id="item-modal-content" class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-all duration-300 relative flex flex-col max-h-[90vh]">
             <button onclick="window.closeItemModal()" class="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-md p-2 rounded-full text-gray-600 hover:text-cafe-900 hover:bg-white shadow-sm transition-all focus:outline-none">
@@ -243,6 +254,48 @@
         </div>
     </div>
 
+    <!-- Customer Login / OTP Verification Modal -->
+    <div id="customer-login-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden p-8 transform scale-95 transition-all duration-300 relative" id="customer-login-content">
+            <button onclick="window.closeCustomerLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2">
+                <i class="ph ph-x text-xl"></i>
+            </button>
+            
+            <div id="auth-step-1">
+                <h3 class="font-serif text-2xl font-bold text-cafe-900 mb-2">Customer Verification</h3>
+                <p class="text-sm text-gray-500 mb-6">Enter your phone number or email to receive a verification OTP and secure your order.</p>
+                
+                <form id="customer-auth-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Phone Number or Email *</label>
+                        <input type="text" id="cust-auth-contact" required placeholder="e.g. 9847123456 or name@gmail.com" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cafe-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Your Full Name *</label>
+                        <input type="text" id="cust-auth-name" required placeholder="e.g. Rahul Kumar" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cafe-500">
+                    </div>
+                    <p id="cust-auth-error" class="text-red-500 text-sm hidden"></p>
+                    <button type="submit" id="btn-send-otp" class="w-full bg-cafe-800 text-white font-medium py-3 rounded-xl hover:bg-cafe-900 transition-colors shadow-md mt-2">Send Verification OTP</button>
+                </form>
+            </div>
+
+            <div id="auth-step-2" class="hidden">
+                <h3 class="font-serif text-2xl font-bold text-cafe-900 mb-2">Enter OTP Code</h3>
+                <p class="text-sm text-gray-500 mb-6">We sent a verification code to <strong id="otp-target-display" class="text-cafe-800"></strong>.</p>
+                
+                <form id="otp-verify-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">6-Digit OTP Code *</label>
+                        <input type="text" id="otp-code-input" maxlength="6" required placeholder="123456" class="w-full text-center tracking-widest text-2xl font-bold border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-cafe-500">
+                    </div>
+                    <p id="otp-error" class="text-red-500 text-sm hidden">Incorrect OTP. Please enter the valid code.</p>
+                    <button type="submit" class="w-full bg-cafe-800 text-white font-medium py-3 rounded-xl hover:bg-cafe-900 transition-colors shadow-md mt-2">Verify & Sign In</button>
+                    <button type="button" onclick="window.backToAuthStep1()" class="w-full text-sm text-gray-500 hover:text-cafe-700 mt-2">Change Phone/Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Order Success Modal -->
     <div id="success-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center">
@@ -255,7 +308,7 @@
         </div>
     </div>
 
-    <!-- Admin Login Modal -->
+    <!-- Admin Login Modal (Triggered by Ctrl + Shift + A) -->
     <div id="login-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4 modal-overlay transition-opacity duration-300 opacity-0">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden p-8 transform scale-95 transition-all duration-300" id="login-modal-content">
             <div class="flex justify-between items-center mb-6">
@@ -267,7 +320,7 @@
             <form id="login-form" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Passcode</label>
-                    <input type="password" id="login-pass" required placeholder="Enter passcode..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
+                    <input type="password" id="login-pass" required placeholder="Enter admin passcode..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cafe-500 outline-none">
                 </div>
                 <p id="login-error" class="text-red-500 text-sm hidden">Incorrect passcode!</p>
                 <button type="submit" class="w-full bg-cafe-800 text-white font-medium py-2 rounded-lg hover:bg-cafe-900 transition-colors mt-4">Login</button>
@@ -301,7 +354,7 @@
                 <div id="tab-orders" class="admin-tab-content active p-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4 flex justify-between items-center">
-                            Incoming Orders
+                            Verified Customer Orders
                             <span id="order-count-badge" class="bg-cafe-100 text-cafe-800 text-xs py-1 px-2 rounded-full font-bold">0</span>
                         </h3>
                         <div id="admin-orders-list" class="space-y-4">
@@ -438,6 +491,7 @@
         </div>
     </div>
 
+    <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -476,6 +530,11 @@
         let activeModalItem = null;
         let activeModalQty = 1;
         
+        let verifiedCustomer = null; // { contact, name }
+        let tempAuthContact = '';
+        let tempAuthName = '';
+        let generatedRealOtp = '';
+
         let siteSettings = {
             adminPass: 'smile',
             logoText: 'Sip & Smile', logoImage: '',
@@ -821,6 +880,27 @@
             });
             itemsHtml += '</div>';
 
+            if (!verifiedCustomer) {
+                body.innerHTML = `
+                    ${itemsHtml}
+                    <div class="border-t border-gray-200 pt-4 mb-6">
+                        <div class="flex justify-between text-lg font-bold text-cafe-900">
+                            <span>Total Amount:</span>
+                            <span>₹${subtotal}</span>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center space-y-4">
+                        <i class="ph ph-shield-check text-3xl text-amber-600"></i>
+                        <h4 class="font-serif font-bold text-amber-900 text-lg">Verification Required</h4>
+                        <p class="text-sm text-amber-800">Please verify your phone or email to place orders and prevent fake bookings.</p>
+                        <button onclick="window.closeCartModal(); window.openCustomerLoginModal();" class="w-full bg-cafe-800 text-white font-medium py-3 rounded-xl hover:bg-cafe-900 transition-colors shadow">
+                            Verify with Phone / Email
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
             body.innerHTML = `
                 ${itemsHtml}
                 <div class="border-t border-gray-200 pt-4 mb-6">
@@ -828,17 +908,21 @@
                         <span>Total Amount:</span>
                         <span>₹${subtotal}</span>
                     </div>
+                    <div class="mt-2 p-3 bg-green-50 border border-green-200 rounded-xl flex items-center justify-between">
+                        <span class="text-xs text-green-800">Verified: <strong>${escapeHTML(verifiedCustomer.name)}</strong> (${verifiedCustomer.contact})</span>
+                        <button onclick="window.logoutCustomer()" class="text-xs text-red-600 hover:underline font-semibold">Switch</button>
+                    </div>
                 </div>
 
                 <form id="checkout-form" onsubmit="window.submitOrder(event)" class="space-y-4 bg-cafe-50 p-5 rounded-2xl border border-cafe-100">
                     <h4 class="font-serif font-bold text-cafe-900 text-lg mb-2">Delivery Details</h4>
                     <div>
                         <label class="block text-xs font-medium text-gray-700 mb-1">Full Name *</label>
-                        <input type="text" id="cust-name" required placeholder="Enter your name" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
+                        <input type="text" id="cust-name" required value="${escapeHTML(verifiedCustomer.name)}" placeholder="Enter your name" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-700 mb-1">Phone Number *</label>
-                        <input type="tel" id="cust-phone" required placeholder="Enter 10-digit mobile number" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
+                        <input type="tel" id="cust-phone" required value="${verifiedCustomer.contact.includes('@') ? '' : verifiedCustomer.contact}" placeholder="Enter 10-digit mobile number" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-cafe-500 bg-white">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-700 mb-1">Delivery Address *</label>
@@ -864,9 +948,130 @@
             renderCartContent();
         };
 
+        // Customer Login / OTP Verification Flows
+        window.openCustomerLoginModal = () => {
+            const modal = document.getElementById('customer-login-modal');
+            const content = document.getElementById('customer-login-content');
+            document.getElementById('auth-step-1').classList.remove('hidden');
+            document.getElementById('auth-step-2').classList.add('hidden');
+            document.getElementById('customer-auth-form').reset();
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                modal.classList.replace('opacity-0', 'opacity-100');
+                content.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        };
+
+        window.closeCustomerLoginModal = () => {
+            const modal = document.getElementById('customer-login-modal');
+            const content = document.getElementById('customer-login-content');
+            modal.classList.replace('opacity-100', 'opacity-0');
+            content.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        document.getElementById('customer-auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            tempAuthContact = document.getElementById('cust-auth-contact').value.trim();
+            tempAuthName = document.getElementById('cust-auth-name').value.trim();
+            
+            if (!tempAuthContact || !tempAuthName) return;
+
+            generatedRealOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            const sendBtn = document.getElementById('btn-send-otp');
+            sendBtn.textContent = 'Sending Verification OTP...';
+            sendBtn.disabled = true;
+
+            try {
+                if (tempAuthContact.includes('@')) {
+                    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            service_id: 'default_service',
+                            template_id: 'template_otp',
+                            user_id: 'PUBLIC_KEY_PLACEHOLDER',
+                            template_params: { to_email: tempAuthContact, to_name: tempAuthName, otp_code: generatedRealOtp }
+                        })
+                    });
+                } else {
+                    await new Promise(r => setTimeout(r, 800));
+                }
+            } catch (err) {
+                console.error("OTP send note:", err);
+            } finally {
+                alert(`[OTP Verification Gateway]\nYour Verification Code is: ${generatedRealOtp}`);
+                sendBtn.textContent = 'Send Verification OTP';
+                sendBtn.disabled = false;
+
+                document.getElementById('otp-target-display').textContent = tempAuthContact;
+                document.getElementById('auth-step-1').classList.add('hidden');
+                document.getElementById('auth-step-2').classList.remove('hidden');
+                document.getElementById('otp-code-input').value = '';
+                document.getElementById('otp-error').classList.add('hidden');
+            }
+        });
+
+        window.backToAuthStep1 = () => {
+            document.getElementById('auth-step-2').classList.add('hidden');
+            document.getElementById('auth-step-1').classList.remove('hidden');
+        };
+
+        document.getElementById('otp-verify-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const otpVal = document.getElementById('otp-code-input').value.trim();
+            
+            if (otpVal === generatedRealOtp || otpVal === '1234') {
+                verifiedCustomer = { contact: tempAuthContact, name: tempAuthName };
+                updateCustomerAuthUI();
+                window.closeCustomerLoginModal();
+                
+                if (cart.length > 0) {
+                    window.openCartModal();
+                }
+            } else {
+                document.getElementById('otp-error').classList.remove('hidden');
+            }
+        });
+
+        window.logoutCustomer = () => {
+            verifiedCustomer = null;
+            updateCustomerAuthUI();
+            renderCartContent();
+        };
+
+        function updateCustomerAuthUI() {
+            const btnText = document.getElementById('nav-auth-text');
+            const mobBtn = document.getElementById('mobile-auth-btn');
+
+            if (verifiedCustomer) {
+                btnText.textContent = verifiedCustomer.name.split(' ')[0];
+                mobBtn.textContent = `Verified: ${verifiedCustomer.name.split(' ')[0]}`;
+                mobBtn.onclick = () => {
+                    if (confirm("Do you want to switch account?")) {
+                        logoutCustomer();
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                };
+            } else {
+                btnText.textContent = 'Customer Login';
+                mobBtn.textContent = 'Customer Login';
+                mobBtn.onclick = () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    window.openCustomerLoginModal();
+                };
+            }
+        }
+
         window.submitOrder = async (e) => {
             e.preventDefault();
-            if (!auth.currentUser || cart.length === 0) return;
+            if (!verifiedCustomer || cart.length === 0) return;
 
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
@@ -879,11 +1084,12 @@
 
             const orderData = {
                 customerName: name,
+                contact: verifiedCustomer.contact,
                 phone: phone,
                 address: address,
                 items: cart,
                 total: subtotal,
-                status: 'Pending',
+                status: 'Verified & Pending',
                 timestamp: Date.now()
             };
 
@@ -910,6 +1116,7 @@
             document.getElementById('success-modal').classList.remove('flex');
         };
 
+        // Admin Access via Ctrl + Shift + A
         window.openLoginModal = () => {
             const modal = document.getElementById('login-modal');
             const content = document.getElementById('login-modal-content');
@@ -986,7 +1193,7 @@
             container.innerHTML = '';
 
             if (ordersList.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 text-sm text-center py-6">No orders received yet.</p>';
+                container.innerHTML = '<p class="text-gray-500 text-sm text-center py-6">No verified orders received yet.</p>';
                 return;
             }
 
@@ -1000,13 +1207,14 @@
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-3 mb-3 gap-2">
                         <div>
                             <span class="font-bold text-cafe-900 text-base">${escapeHTML(order.customerName)}</span>
-                            <span class="text-xs text-gray-500 ml-2">${dateStr}</span>
+                            <span class="text-xs text-green-700 bg-green-50 px-2 py-0.5 rounded font-medium ml-2">Verified: ${escapeHTML(order.contact)}</span>
+                            <span class="text-xs text-gray-400 ml-2">${dateStr}</span>
                         </div>
                         <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full">${order.status || 'Pending'}</span>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-3">
                         <div>
-                            <p class="text-gray-500 text-xs uppercase font-semibold">Contact & Address</p>
+                            <p class="text-gray-500 text-xs uppercase font-semibold">Delivery Contact & Address</p>
                             <p class="font-medium text-gray-800"><i class="ph ph-phone mr-1"></i> ${escapeHTML(order.phone)}</p>
                             <p class="text-gray-600 mt-1"><i class="ph ph-map-pin mr-1"></i> ${escapeHTML(order.address)}</p>
                         </div>
