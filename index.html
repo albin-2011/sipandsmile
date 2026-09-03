@@ -182,8 +182,8 @@
     <footer class="bg-cafe-900 text-cafe-100 py-8 border-t border-cafe-800">
         <div class="max-w-6xl mx-auto px-6 text-center text-sm text-cafe-400 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
-                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale cursor-pointer" ondblclick="window.openLoginModal()">
-                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text" class="cursor-pointer" ondblclick="window.openLoginModal()">Sip & Smile</span>. All rights reserved.</p>
+                <img id="footer-logo-img" src="" alt="Cafe Logo" class="hidden h-6 w-auto object-contain opacity-75 grayscale cursor-pointer" title="Double click for Admin" ondblclick="window.openLoginModal()">
+                <p>&copy; <span id="current-year"></span> <span id="footer-logo-text" class="cursor-pointer" title="Double click for Admin" ondblclick="window.openLoginModal()">Sip & Smile</span>. All rights reserved.</p>
             </div>
             <div class="flex gap-4">
                 <a id="display-social-ig" href="#" target="_blank" class="hover:text-white transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
@@ -1061,7 +1061,7 @@
                         </div>
                         <div class="flex gap-2">
                             <button onclick="window.editItem('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
-                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
+                            <button onclick="window.deleteItem('${item.id}')" class="p-1.5 text-red-600 hover:bg-blue-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                         </div>
                     `;
                     listContainer.appendChild(itemEl);
@@ -1084,7 +1084,7 @@
                     </div>
                     <div class="flex gap-2">
                         <button onclick="window.editCategory('${cat.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Edit"><i class="ph ph-pencil-simple"></i></button>
-                        <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-red-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
+                        <button onclick="window.deleteCategory('${cat.id}')" class="p-1.5 text-red-600 hover:bg-blue-50 rounded" title="Delete"><i class="ph ph-trash"></i></button>
                     </div>
                 `;
                 listContainer.appendChild(catEl);
@@ -1306,7 +1306,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeData();
 
-            // Hidden shortcut to open admin login: Press Ctrl + Shift + A
+            // Shortcut to open admin login: Press Ctrl + Shift + A
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
                     e.preventDefault();
